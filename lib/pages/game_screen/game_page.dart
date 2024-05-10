@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:games_wiki/core/inject.dart';
 import 'package:games_wiki/pages/game_screen/game_page_store.dart';
 import 'package:games_wiki/services/game_service.dart';
@@ -64,6 +62,13 @@ class _GamePageState extends State<GamePage> {
                 ),
                 Text(
                   '${gameSelected.name}',
+                  style: const TextStyle(fontSize: 20),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  gameSelected.released!.replaceAll('-', '/'),
                   style: const TextStyle(fontSize: 20),
                 ),
                 const SizedBox(
@@ -136,27 +141,6 @@ class _GamePageState extends State<GamePage> {
                           ),
                         );
                       }),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                SizedBox(
-                  width: 300,
-                  child: Text(
-                    '${gameSelected.requirementsRecommended}',
-                    style: const TextStyle(fontSize: 20),
-                  ),
-                ),
-                const Divider(color: Colors.black,),
-                const SizedBox(
-                  height: 10,
-                ),
-                SizedBox(
-                  width: 300,
-                  child: Text(
-                    '${gameSelected.requirementsMinimum}',
-                    style: const TextStyle(fontSize: 20),
-                  ),
                 ),
                 const SizedBox(
                   height: 10,

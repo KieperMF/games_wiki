@@ -30,9 +30,7 @@ class GameModel {
     String? recommended = "No Data";
   String? minimum = "No Data";
 
-  // Verificar se há plataformas disponíveis
   if (platformsJson.isNotEmpty) {
-    // Verificar se requisitos estão presentes na primeira plataforma
     Map<String, dynamic>? firstPlatform = platformsJson[0];
     if (firstPlatform?['requirements_en'] != null) {
       recommended = firstPlatform!['requirements_en']['recommended'];

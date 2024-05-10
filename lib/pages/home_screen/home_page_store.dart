@@ -17,4 +17,15 @@ class HomePageStore with ChangeNotifier{
       debugPrint("erro $e");
     }
   }
+
+  List<String>? screenshots;
+
+  getGameScreenShots(int? id)async{
+    try{
+      screenshots = (await service.getGameScreenShots(id!))!;
+    notifyListeners();
+    }catch(e){
+      debugPrint("erro get screenshot $e");
+    }
+  }
 }
