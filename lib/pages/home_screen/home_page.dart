@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:games_wiki/core/inject.dart';
+import 'package:games_wiki/pages/game_screen/game_page.dart';
+import 'package:games_wiki/pages/game_screen/game_page_store.dart';
 import 'package:games_wiki/pages/home_screen/home_page_store.dart';
 import 'package:games_wiki/services/game_service.dart';
 import 'package:provider/provider.dart';
@@ -29,7 +31,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   _load() async {
-    store!.getGames();
+    await store!.getGames();
   }
 
   @override
@@ -54,15 +56,21 @@ class _HomePageState extends State<HomePage> {
                       physics: const BouncingScrollPhysics(),
                       itemCount: store!.games.length,
                       itemBuilder: (context, index) {
-                        return Column(
+                        return Column( 
                           children: [
-                            Container(
-                              decoration:const BoxDecoration(color: Colors.white),
-                              child: store!.games[index].backgroundImage!.isNotEmpty ? SizedBox(
-                                height: 150,
-                                width: 200,
-                                child: Image.network(
-                                    '${store!.games[index].backgroundImage}')) : const Icon(Icons.image),
+                            ElevatedButton(
+                              onPressed: (){
+                                gameSelected = store!.games[index];
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => GamePage.create()));
+                              },
+                              child: Container(
+                                decoration:const BoxDecoration(color: Colors.white),
+                                child: store!.games[index].backgroundImage!.isNotEmpty ? SizedBox(
+                                  height: 150,
+                                  width: 200,
+                                  child: Image.network(
+                                      '${store!.games[index].backgroundImage}')) : const Icon(Icons.image),
+                              ),
                             ),
                             const SizedBox(height: 10,)
                           ],
