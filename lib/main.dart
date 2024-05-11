@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:games_wiki/core/inject.dart';
-import 'package:games_wiki/pages/home_screen/home_page.dart';
+import 'package:games_wiki/pages/home_screen/navigation_bar.dart';
 
 void main() {
   Injenction.setup();
@@ -12,9 +12,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomePage.create(),
+      home: NavigationBarController(),
     );
   }
 }

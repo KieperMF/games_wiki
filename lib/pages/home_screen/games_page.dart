@@ -2,26 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:games_wiki/core/inject.dart';
 import 'package:games_wiki/pages/game_screen/game_page.dart';
 import 'package:games_wiki/pages/game_screen/game_page_store.dart';
-import 'package:games_wiki/pages/home_screen/home_page_store.dart';
 import 'package:games_wiki/services/game_service.dart';
 import 'package:provider/provider.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class GamesPage extends StatefulWidget {
+  const GamesPage({super.key});
 
   static Widget create() {
     return ChangeNotifierProvider(
-      create: (_) => HomePageStore(service: inject<GameService>()),
-      child: const HomePage(),
+      create: (_) => GamePageStore(service: inject<GameService>()),
+      child: const GamesPage(),
     );
   }
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<GamesPage> createState() => _GamesPageState();
 }
 
-class _HomePageState extends State<HomePage> {
-  HomePageStore? store;
+class _GamesPageState extends State<GamesPage> {
+  GamePageStore? store;
 
   @override
   void initState() {

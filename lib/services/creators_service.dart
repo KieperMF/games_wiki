@@ -9,7 +9,7 @@ class CreatorsService{
   List<CreatorsModel>? creators;
   HttpInterface http;
 
-  getAllGames() async {
+  getAllCreators() async {
     try {
       final response = await http.getData(path:'https://api.rawg.io/api/creators?key=f40f66dd22c542d2b422b922b714f749');
       final decode = jsonDecode(response.body)['results'] as List;

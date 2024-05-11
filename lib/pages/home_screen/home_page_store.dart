@@ -9,7 +9,7 @@ class HomePageStore with ChangeNotifier{
     required this.service
   });
 
-  getGames()async{
+  /*getGames()async{
     try{
       games = (await service.getAllGames())!;
     notifyListeners();
@@ -27,5 +27,5 @@ class HomePageStore with ChangeNotifier{
     }catch(e){
       debugPrint("erro get screenshot $e");
     }
-  }
+  }*/
 }
