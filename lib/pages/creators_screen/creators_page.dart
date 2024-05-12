@@ -39,33 +39,38 @@ class _CreatorsPageState extends State<CreatorsPage> {
   @override
   Widget build(BuildContext context) {
     creatorStore = context.watch();
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Creators"),
-      ),
-      body: SafeArea(
-          child: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            children: [
-              _isLoading ? CircularProgressIndicator() :
-              SizedBox(
-                height: 300,
-                width: 200,
-                child: ListView.builder(
-                  itemCount: creatorStore!.creators.length,
-                  itemBuilder: (context, index){
-                    return Column(
-                      children: [
-                        Text("${creatorStore!.creators[index].name}")
-                      ],
-                    );
-                  }),
-              )
-            ],
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text("Creators"),
+        ),
+        body: SingleChildScrollView(
+          child: Center(
+            child: Column(
+              children: [
+                _isLoading ? const CircularProgressIndicator(color: Colors.red,) :
+                  ListView.builder(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.vertical,
+                    physics:const BouncingScrollPhysics(),
+                      itemCount: creatorStore!.creators.length,
+                      itemBuilder: (context, index){
+                        return Column(
+                          children: [
+                            SizedBox(
+                              height: 150,
+                              child: Image.network("${creatorStore!.creators[index].image}"),
+                            ),
+                            Text("${creatorStore!.creators[index].name}"),
+                            const SizedBox(height: 10,)
+                          ],
+                        );
+                      }),
+              ],
+            ),
           ),
         ),
-      )),
+      ),
     );
   }
 }

@@ -3,7 +3,7 @@ class CreatorsModel{
   String? image;
   List<String>? gamesMaded;
   List<String>? positions;
-  String? gamesCount;
+  int? gamesCount;
 
   CreatorsModel({
     this.gamesCount,

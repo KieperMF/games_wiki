@@ -11,7 +11,7 @@ class CreatorStore with ChangeNotifier{
 
   getCreators()async{
     try{
-      creators = (await service.getAllCreators())!;
+      creators = await service.getAllCreators();
     notifyListeners();
     }catch(e){
       debugPrint("erro $e");
