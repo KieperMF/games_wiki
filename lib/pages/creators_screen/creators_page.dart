@@ -20,7 +20,7 @@ class CreatorsPage extends StatefulWidget {
 
 class _CreatorsPageState extends State<CreatorsPage> {
   CreatorStore? creatorStore;
-  bool _isLoading = true;
+  //bool _isLoading = true;
 
   @override
   void initState() {
@@ -31,9 +31,9 @@ class _CreatorsPageState extends State<CreatorsPage> {
 
   _load() async {
     await creatorStore!.getCreators();
-    setState(() {
+    /*setState(() {
       _isLoading = false;
-    });
+    });*/
   }
 
   @override
@@ -47,25 +47,48 @@ class _CreatorsPageState extends State<CreatorsPage> {
         body: SingleChildScrollView(
           child: Center(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                _isLoading ? const CircularProgressIndicator(color: Colors.red,) :
-                  ListView.builder(
+                ListView.builder(
                     shrinkWrap: true,
                     scrollDirection: Axis.vertical,
-                    physics:const BouncingScrollPhysics(),
-                      itemCount: creatorStore!.creators.length,
-                      itemBuilder: (context, index){
-                        return Column(
-                          children: [
-                            SizedBox(
-                              height: 150,
-                              child: Image.network("${creatorStore!.creators[index].image}"),
+                    physics: const BouncingScrollPhysics(),
+                    itemCount: creatorStore!.creators.length,
+                    itemBuilder: (context, index) {
+                      return Column(
+                        children: [
+                          SizedBox(
+                            height: 150,
+                            child: Image.network(
+                              loadingBuilder:
+                                  (context, child, loadingProgress) {
+                                if (loadingProgress == null) {
+                                  return child;
+                                } else {
+                                  return const Center(
+                                    child: CircularProgressIndicator(
+                                      color: Colors.red,
+                                    ),
+                                  );
+                                }
+                              },
+                              "${creatorStore!.creators[index].image}",
+                              errorBuilder: (context, error, stackTrace) {
+                                return const Icon(
+                                  Icons.error,
+                                  size: 150,
+                                );
+                              },
                             ),
-                            Text("${creatorStore!.creators[index].name}"),
-                            const SizedBox(height: 10,)
-                          ],
-                        );
-                      }),
+                          ),
+                          Text("${creatorStore!.creators[index].name}"),
+                          const SizedBox(
+                            height: 10,
+                          )
+                        ],
+                      );
+                    }),
               ],
             ),
           ),

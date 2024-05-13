@@ -28,7 +28,7 @@ class GameService {
           path:
               'https://api.rawg.io/api/games/$gameId/screenshots?key=f40f66dd22c542d2b422b922b714f749');
       final decode = jsonDecode(response.body);
-      List<dynamic> results = decode['results'];
+      List<dynamic> results = decode['results'] as List;
       for (var result in results) {
         screenShotsGame.add(result['image']);
       }

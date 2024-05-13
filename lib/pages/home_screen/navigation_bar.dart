@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:games_wiki/pages/creators_screen/creators_page.dart';
-import 'package:games_wiki/pages/home_screen/games_page.dart';
+import 'package:games_wiki/pages/game_screen/games_page.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
 
 class NavigationBarController extends StatefulWidget {
   const NavigationBarController({super.key});
@@ -10,7 +11,7 @@ class NavigationBarController extends StatefulWidget {
 }
 
 class _NavigationBarControllerState extends State<NavigationBarController> {
-  int selectedItem = 0;
+  int _selectedItem = 0;
   Widget bodyController(int selectedpage){
     if(selectedpage == 0){
       return GamesPage.create();
@@ -23,26 +24,54 @@ class _NavigationBarControllerState extends State<NavigationBarController> {
   Widget build(BuildContext context) {
     return  SafeArea(
       child: Scaffold(
-      body: bodyController(selectedItem),
-      bottomNavigationBar: BottomNavigationBar(currentIndex: selectedItem,
-      backgroundColor: const Color.fromRGBO(12, 74, 110, 1.0),
-      fixedColor: Colors.white,
-      items:const[
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home,),
-          label: 'Home',
+      body: IndexedStack(index: _selectedItem,children: [
+        GamesPage.create(),
+        CreatorsPage.create()
+      ],),
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              blurRadius: 20,
+              color: Colors.black.withOpacity(.1),
+            )
+          ],
         ),
-          BottomNavigationBarItem(
-          icon:  Icon(Icons.person),
-          label: 'Carrinho',
-          backgroundColor: Colors.white
-        ),
-      ],
-      onTap: (value){
-        setState(() {
-          selectedItem = value;
-        });
-      },),
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
+            child: GNav(
+              rippleColor: Colors.grey[300]!,
+              hoverColor: Colors.grey[100]!,
+              curve: Curves.decelerate,
+              gap: 8,
+              activeColor: Colors.blue,
+              iconSize: 24,
+              padding:const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+              duration:const Duration(milliseconds: 600),
+              tabBackgroundColor: Colors.grey.shade300,
+              color: Colors.black,
+              tabs: const [
+                GButton(
+                  icon: Icons.videogame_asset_rounded,
+                  text: 'Games',
+                ),
+                GButton(
+                  icon: Icons.person,
+                  text: 'Creators',
+                ),
+              ],
+              selectedIndex: _selectedItem,
+              onTabChange: (index) {
+                setState(() {
+                  _selectedItem = index;
+                });
+              },
+            ),
+          ),
+      ),
+    )
       ),
     );
   }
