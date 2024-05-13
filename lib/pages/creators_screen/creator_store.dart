@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:games_wiki/models/creators_model.dart';
 import 'package:games_wiki/services/creators_service.dart';
 
+CreatorsModel? creatorSelected;
+
 class CreatorStore with ChangeNotifier{
   List<CreatorsModel> creators = [];
   CreatorsService service;
