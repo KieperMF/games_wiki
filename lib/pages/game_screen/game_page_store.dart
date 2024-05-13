@@ -11,10 +11,36 @@ class GamePageStore with ChangeNotifier{
     required this.service
   });
   List<String>? screenshots;
+  String? previousPage;
 
   getGames()async{
     try{
       games = (await service.getAllGames())!;
+    notifyListeners();
+    }catch(e){
+      debugPrint("erro $e");
+    }
+  }
+
+  getGamesNextPage()async{
+    try{
+      List<GameModel>? moreGames = await service.getNextPageGames();
+      games.addAll(moreGames!);
+      previousPage = previousGamePage;
+    notifyListeners();
+    }catch(e){
+      debugPrint("erro $e");
+    }
+  }
+
+  getGamesPreviousPage()async{
+    try{
+      int i = 0;
+      previousPage = await service.getPreviousPageGames();
+      while(i < 20){
+        games.removeLast();
+        i++;
+      }
     notifyListeners();
     }catch(e){
       debugPrint("erro $e");

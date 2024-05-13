@@ -20,7 +20,6 @@ class CreatorsPage extends StatefulWidget {
 
 class _CreatorsPageState extends State<CreatorsPage> {
   CreatorStore? creatorStore;
-  //bool _isLoading = true;
 
   @override
   void initState() {
@@ -31,9 +30,6 @@ class _CreatorsPageState extends State<CreatorsPage> {
 
   _load() async {
     await creatorStore!.getCreators();
-    /*setState(() {
-      _isLoading = false;
-    });*/
   }
 
   @override
@@ -50,6 +46,9 @@ class _CreatorsPageState extends State<CreatorsPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                creatorStore!.creators.isEmpty ? IconButton(onPressed: (){
+                  _load();
+                }, icon: const Icon(Icons.refresh)) :
                 ListView.builder(
                     shrinkWrap: true,
                     scrollDirection: Axis.vertical,

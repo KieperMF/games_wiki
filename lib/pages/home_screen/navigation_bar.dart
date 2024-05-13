@@ -30,11 +30,11 @@ class _NavigationBarControllerState extends State<NavigationBarController> {
       ],),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: const Color.fromRGBO(63, 63, 70, 1.0),
           boxShadow: [
             BoxShadow(
               blurRadius: 20,
-              color: Colors.black.withOpacity(.1),
+              color: Colors.white.withOpacity(.1),
             )
           ],
         ),

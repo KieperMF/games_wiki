@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:games_wiki/core/inject.dart';
 import 'package:games_wiki/pages/game_screen/game_page.dart';
 import 'package:games_wiki/pages/game_screen/game_page_store.dart';
@@ -51,6 +49,9 @@ class _GamesPageState extends State<GamesPage> {
                 const SizedBox(
                   height: 10,
                 ),
+                store!.games.isEmpty ? IconButton(onPressed: (){
+                  _load();
+                }, icon: const Icon(Icons.refresh)) :
                 ListView.builder(
                     shrinkWrap: true,
                     scrollDirection: Axis.vertical,
@@ -117,6 +118,21 @@ class _GamesPageState extends State<GamesPage> {
                         ),
                       );
                     }),
+                   Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                       nextGamePage != null ?
+                    TextButton(onPressed: (){
+                      store!.getGamesNextPage();
+                      setState(() {});
+                    }, child: const Text('Load More')) : const Text(''),
+                    const SizedBox(width: 20,),
+                    store!.previousPage != null ?
+                    TextButton(onPressed: (){
+                      store!.getGamesPreviousPage();
+                    }, child: const Text('Less')) : const Text(''),
+                    ],
+                   )
               ],
             ),
           ),
