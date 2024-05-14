@@ -49,90 +49,108 @@ class _GamesPageState extends State<GamesPage> {
                 const SizedBox(
                   height: 10,
                 ),
-                store!.games.isEmpty ? IconButton(onPressed: (){
-                  _load();
-                }, icon: const Icon(Icons.refresh)) :
-                ListView.builder(
-                    shrinkWrap: true,
-                    scrollDirection: Axis.vertical,
-                    physics: const BouncingScrollPhysics(),
-                    itemCount: store!.games.length,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SizedBox(
-                              height: 150,
-                              width: 380,
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  gameSelected = store!.games[index];
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              GamePage.create()));
-                                },
-                                child: Row(children: [
-                                  SizedBox(
-                                      height: 110,
-                                      width: 160,
-                                      child: Image.network(
-                                        loadingBuilder:
-                                            (context, child, loadingProgress) {
-                                          if (loadingProgress == null) {
-                                            return child;
-                                          } else {
-                                            return const Center(
-                                              child: CircularProgressIndicator(
-                                                color: Colors.red,
-                                              ),
-                                            );
-                                          }
-                                        },
-                                        '${store!.games[index].backgroundImage}',
-                                        errorBuilder:
-                                            (context, error, stackTrace) {
-                                          return const Icon(
-                                            Icons.image,
-                                            size: 140,
-                                          );
-                                        },
-                                      )),
-                                  const SizedBox(
-                                    width: 10,
+                store!.games.isEmpty
+                    ? IconButton(
+                        onPressed: () {
+                          _load();
+                        },
+                        icon: const Icon(Icons.refresh))
+                    : ListView.builder(
+                        shrinkWrap: true,
+                        scrollDirection: Axis.vertical,
+                        physics: const BouncingScrollPhysics(),
+                        itemCount: store!.games.length,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.all(10),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                  height: 150,
+                                  width: 380,
+                                  child: ElevatedButton(
+                                    onPressed: () {
+                                      gameSelected = store!.games[index];
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  GamePage.create()));
+                                    },
+                                    child: Row(children: [
+                                      SizedBox(
+                                          height: 110,
+                                          width: 160,
+                                          child: Image.network(
+                                            loadingBuilder: (context, child,
+                                                loadingProgress) {
+                                              if (loadingProgress == null) {
+                                                return child;
+                                              } else {
+                                                return const Center(
+                                                  child:
+                                                      CircularProgressIndicator(
+                                                    color: Colors.red,
+                                                  ),
+                                                );
+                                              }
+                                            },
+                                            '${store!.games[index].backgroundImage}',
+                                            errorBuilder:
+                                                (context, error, stackTrace) {
+                                              return const Icon(
+                                                Icons.image,
+                                                size: 140,
+                                              );
+                                            },
+                                          )),
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
+                                      SizedBox(
+                                          width: 100,
+                                          child: Text(
+                                            "${store!.games[index].name}",
+                                            style: const TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 16),
+                                          ))
+                                    ]),
                                   ),
-                                  SizedBox(
-                                      width: 100,
-                                      child: Text(
-                                        "${store!.games[index].name}",
-                                        style: const TextStyle(
-                                            color: Colors.black, fontSize: 16),
-                                      ))
-                                ]),
-                              ),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
-                      );
-                    }),
-                   Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                       nextGamePage != null ?
-                    TextButton(onPressed: (){
-                      store!.getGamesNextPage();
-                      setState(() {});
-                    }, child: const Text('Load More')) : const Text(''),
-                    const SizedBox(width: 20,),
-                    store!.previousPage != null ?
-                    TextButton(onPressed: (){
-                      store!.getGamesPreviousPage();
-                    }, child: const Text('Less')) : const Text(''),
-                    ],
-                   )
+                          );
+                        }),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    store!.previousPage != null
+                        ? IconButton(
+                            onPressed: () {
+                              store!.getGamesPreviousPage();
+                            },
+                            icon: const Icon(
+                              Icons.remove,
+                              size: 36,
+                            ))
+                        : const Text(''),
+                    const SizedBox(
+                      width: 20,
+                    ),
+                    nextGamePage != null
+                        ? IconButton(
+                            onPressed: () {
+                              store!.getGamesNextPage();
+                            },
+                            icon: const Icon(
+                              Icons.add,
+                              size: 36,
+                            ))
+                        : const Text(''),
+                  ],
+                )
               ],
             ),
           ),

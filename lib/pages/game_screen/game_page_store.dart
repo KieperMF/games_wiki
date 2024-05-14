@@ -25,7 +25,7 @@ class GamePageStore with ChangeNotifier{
   getGamesNextPage()async{
     try{
       List<GameModel>? moreGames = await service.getNextPageGames();
-      games.addAll(moreGames!);
+      games= moreGames!;
       previousPage = previousGamePage;
     notifyListeners();
     }catch(e){
@@ -35,13 +35,9 @@ class GamePageStore with ChangeNotifier{
 
   getGamesPreviousPage()async{
     try{
-      int i = 0;
-      previousPage = await service.getPreviousPageGames();
-      while(i < 20){
-        games.removeLast();
-        i++;
-      }
-    notifyListeners();
+      List<GameModel>? moreGames = await service.getPreviousPageGames();
+      games = moreGames!;
+      notifyListeners();
     }catch(e){
       debugPrint("erro $e");
     }

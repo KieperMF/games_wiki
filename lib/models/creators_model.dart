@@ -4,10 +4,10 @@ class CreatorsModel{
   List<String>? gamesMaded;
   List<String>? positions;
   int? gamesCount;
-  String? baclgroundImage;
+  String? backgroundImage;
 
   CreatorsModel({
-    this.baclgroundImage,
+    this.backgroundImage,
     this.gamesCount,
     this.gamesMaded,
     this.image,
@@ -35,7 +35,7 @@ class CreatorsModel{
       name: json['name'],
       image: json['image'],
       gamesCount: json['games_count'],
-      baclgroundImage: json['image_background'],
+      backgroundImage: json['image_background'],
       positions: positi,
       gamesMaded: gamesRes
     );

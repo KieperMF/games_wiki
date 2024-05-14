@@ -46,7 +46,7 @@ class _NavigationBarControllerState extends State<NavigationBarController> {
               hoverColor: Colors.grey[100]!,
               curve: Curves.decelerate,
               gap: 8,
-              activeColor: Colors.blue,
+              activeColor:const Color.fromRGBO(7, 89, 133, 1),
               iconSize: 24,
               padding:const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
               duration:const Duration(milliseconds: 600),

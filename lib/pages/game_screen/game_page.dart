@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:games_wiki/core/inject.dart';
 import 'package:games_wiki/pages/game_screen/game_page_store.dart';
 import 'package:games_wiki/services/game_service.dart';
@@ -44,58 +46,151 @@ class _GamePageState extends State<GamePage> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Game Page'),
+          title: const Text(
+            'Game Details',
+            style: TextStyle(color: Colors.white),
+          ),
+          backgroundColor: const Color.fromRGBO(8, 47, 73, 1),
         ),
-        backgroundColor: Colors.grey,
+        backgroundColor: const Color.fromRGBO(8, 47, 73, 1),
         body: SingleChildScrollView(
           child: Center(
             child: Column(
               children: [
+                Stack(
+                  children: [
+                    SizedBox(
+                        width: MediaQuery.of(context).size.width,
+                        child: _isLoading
+                            ? const Padding(
+                                padding: EdgeInsets.only(top: 50),
+                                child: Center(
+                                    child: CircularProgressIndicator(
+                                  color: Colors.red,
+                                )),
+                              )
+                            : Opacity(
+                                opacity: 0.7,
+                                child: Image.network(
+                                  gamePageStore!.screenshots!.last,
+                                  errorBuilder: (context, error, stackTrace) {
+                                    return const Icon(
+                                      Icons.error,
+                                      size: 150,
+                                    );
+                                  },
+                                ),
+                              )),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 130),
+                      child: Align(
+                        alignment: Alignment.bottomCenter,
+                        child: SizedBox(
+                            height: 130,
+                            child: Image.network(loadingBuilder:
+                                (context, child, loadingProgress) {
+                              if (loadingProgress == null) {
+                                return child;
+                              } else {
+                                return const Center(
+                                  child: CircularProgressIndicator(
+                                    color: Colors.red,
+                                  ),
+                                );
+                              }
+                            }, "${gameSelected.backgroundImage}")),
+                      ),
+                    ),
+                  ],
+                ),
                 const SizedBox(
                   height: 10,
                 ),
-                SizedBox(
-                    height: 200,
-                    child: Image.network("${gameSelected.backgroundImage}")),
-                const SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  '${gameSelected.name}',
-                  style: const TextStyle(fontSize: 20),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  gameSelected.released!.replaceAll('-', '/'),
-                  style: const TextStyle(fontSize: 20),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  'Metacritic: ${gameSelected.rating}',
-                  style: const TextStyle(fontSize: 20),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                const Text(
-                  'Avalable Plataforms:',
-                  style: TextStyle(color: Colors.black, fontSize: 20),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                for (String plataform in gameSelected.plataformNames!) ...[
-                  Text(plataform,
-                    style: const TextStyle(color: Colors.black, fontSize: 20),
+                Container(
+                  width: 380,
+                  decoration: BoxDecoration(
+                      color: Colors.black,
+                      borderRadius: BorderRadius.circular(16)),
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Padding(
+                      padding: const EdgeInsets.all(5),
+                      child: Text(
+                        '${gameSelected.name}',
+                        style: const TextStyle(fontSize: 22, color: Colors.white),
+                      ),
+                    ),
                   ),
-                ],
-                
+                ),
                 const SizedBox(
                   height: 10,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 10),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      'Metacritic: ${gameSelected.rating}',
+                      style: const TextStyle(fontSize: 20, color: Colors.white),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Row(children: [
+                  for (int i = 0; i < gameSelected.genres!.length; i++) ...[
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                          color: Colors.black,
+                          borderRadius: BorderRadius.circular(16)),
+                      child: Padding(
+                        padding: const EdgeInsets.all(5),
+                        child: Text(
+                          gameSelected.genres![i],
+                          style: const TextStyle(
+                              fontSize: 20, color: Colors.white),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    )
+                  ],
+                ]),
+                const SizedBox(
+                  height: 10,
+                ),
+                Column(
+                      children: [
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        const Text(
+                          'Avalable Plataforms:',
+                          style: TextStyle(color: Colors.white, fontSize: 20),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        for (String plataform
+                            in gameSelected.plataformNames!) ...[
+                          Text(
+                            plataform,
+                            style: const TextStyle(
+                                color: Colors.white, fontSize: 20),
+                          ),
+                        ],
+                        const SizedBox(
+                          height: 10,
+                        ),
+                      ],
+                    ),
+                const SizedBox(
+                  width: 10,
                 ),
                 const Padding(
                     padding: EdgeInsets.only(left: 10),
@@ -103,7 +198,7 @@ class _GamePageState extends State<GamePage> {
                         alignment: Alignment.centerLeft,
                         child: Text(
                           "Game Screenshots",
-                          style: TextStyle(fontSize: 22, color: Colors.black),
+                          style: TextStyle(fontSize: 22, color: Colors.white),
                         ))),
                 SizedBox(
                   height: 200,
@@ -129,6 +224,19 @@ class _GamePageState extends State<GamePage> {
                                               border: Border.all(
                                                   color: Colors.white)),
                                           child: Image.network(
+                                            loadingBuilder: (context, child,
+                                                loadingProgress) {
+                                              if (loadingProgress == null) {
+                                                return child;
+                                              } else {
+                                                return const Center(
+                                                  child:
+                                                      CircularProgressIndicator(
+                                                    color: Colors.red,
+                                                  ),
+                                                );
+                                              }
+                                            },
                                             gamePageStore!.screenshots![index],
                                             height: 170,
                                           ),

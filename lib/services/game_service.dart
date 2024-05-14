@@ -44,7 +44,9 @@ class GameService {
       final response = await http.getData(path: '$previousGamePage');
       nextGamePage = jsonDecode(response.body)['next'];
       previousGamePage = jsonDecode(response.body)['previous'] ;
-      return previousGamePage;
+      final decode = jsonDecode(response.body)['results'] as List;
+      games = decode.map((e) => GameModel.allGameFromJson(e)).toList();
+      return games;
     } catch (e) {
       debugPrint('erro service: $e');
     }

@@ -36,14 +36,11 @@ class _CreatorPageState extends State<CreatorPage> {
                   children: [
                     SizedBox(
                       width: MediaQuery.of(context).size.width,
-                      child: Container(
-                        color: Colors.grey,
-                        child: Opacity(
-                            opacity: 0.6,
-                            child: Image.network(
-                              '${creatorSelected!.baclgroundImage}',
-                            )),
-                      ),
+                      child: Opacity(
+                          opacity: 0.7,
+                          child: Image.network(
+                            '${creatorSelected!.backgroundImage}',
+                          )),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 120),

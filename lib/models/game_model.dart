@@ -7,9 +7,11 @@ class GameModel {
   int? rating;
   String? requirementsMinimum;
   String? requirementsRecommended;
+  List<String>? genres;
 
   GameModel(
       {this.id ,this.name, 
+      this.genres,
       this.backgroundImage, 
       this.released, 
       this.plataformNames, 
@@ -19,6 +21,14 @@ class GameModel {
 
   factory GameModel.allGameFromJson(Map<String, dynamic> json) {
     List<dynamic>? platformsJson = json['platforms'];
+    List<dynamic>? genresJson = json['genres'];
+
+    List<String>? genresForm = genresJson!
+        .map((e) {
+          return e['name'];
+        })
+        .cast<String>()
+        .toList();
 
     List<String>? platformNames = platformsJson!
         .map((platform) {
@@ -44,6 +54,7 @@ class GameModel {
         released: json['released'],
         backgroundImage: json['background_image'],
         rating: json['metacritic'],
+        genres: genresForm,
         requirementsMinimum: minimum ?? "No Data",
         requirementsRecommended: recommended ?? "No Data",
         plataformNames: platformNames);
