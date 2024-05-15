@@ -24,6 +24,7 @@ class GamePageStore with ChangeNotifier{
 
   getGamesNextPage()async{
     try{
+      games.clear();
       List<GameModel>? moreGames = await service.getNextPageGames();
       games= moreGames!;
       previousPage = previousGamePage;
@@ -51,4 +52,5 @@ class GamePageStore with ChangeNotifier{
       debugPrint("erro get screenshot $e");
     }
   }
+
 }

@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:games_wiki/core/inject.dart';
 import 'package:games_wiki/pages/game_screen/game_page_store.dart';
 import 'package:games_wiki/services/game_service.dart';
@@ -40,6 +38,10 @@ class _GamePageState extends State<GamePage> {
     });
   }
 
+  void disposePage(){
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     gamePageStore = context.watch();
@@ -50,6 +52,11 @@ class _GamePageState extends State<GamePage> {
             'Game Details',
             style: TextStyle(color: Colors.white),
           ),
+          actions: [
+            IconButton(onPressed: (){
+              Navigator.of(context).pop();
+            }, icon: const Icon(Icons.arrow_back_ios))
+          ],
           backgroundColor: const Color.fromRGBO(8, 47, 73, 1),
         ),
         backgroundColor: const Color.fromRGBO(8, 47, 73, 1),
