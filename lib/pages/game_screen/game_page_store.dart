@@ -29,7 +29,6 @@ class GamePageStore with ChangeNotifier{
         List<GameModel>? moreGames = await service.getNextPageGames();
         games= moreGames!;
         previousPage = previousGamePage;
-        debugPrint('next page $games');
         notifyListeners();
       
     }catch(e){

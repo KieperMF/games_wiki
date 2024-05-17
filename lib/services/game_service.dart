@@ -32,7 +32,6 @@ class GameService {
       previousGamePage = jsonDecode(response.body)['previous'];
       final decode = jsonDecode(response.body)['results'] as List;
       games = decode.map((e) => GameModel.allGameFromJson(e)).toList();
-        //getImage(games!);
       
       return games;
     } catch (e) {

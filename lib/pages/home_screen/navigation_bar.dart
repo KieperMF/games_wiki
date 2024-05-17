@@ -25,7 +25,12 @@ class _NavigationBarControllerState extends State<NavigationBarController> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-          body: bodyController(_selectedItem),
+          body: IndexedStack(
+            index: _selectedItem, children: [
+              GamesPage.create(),
+              CreatorsPage.create()
+            ],
+          ),
           bottomNavigationBar: Container(
             decoration: BoxDecoration(
               color: const Color.fromRGBO(63, 63, 70, 1.0),

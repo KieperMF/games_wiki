@@ -94,7 +94,8 @@ class _CreatorsPageState extends State<CreatorsPage> {
                                                   ),
                                                 );
                                               }
-                                            },
+                                            }, 
+                                            cacheWidth: 400,
                                             "${creatorStore!.creators[index].image}",
                                             errorBuilder:
                                                 (context, error, stackTrace) {
