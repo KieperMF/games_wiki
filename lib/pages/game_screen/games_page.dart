@@ -83,17 +83,15 @@ class _GamesPageState extends State<GamesPage> {
                                           height: 110,
                                           width: 160,
                                           child: Image.network(
+                                            cacheWidth: 400,
+                                            //cacheHeight: 150,
                                             loadingBuilder: (context, child,
                                                 loadingProgress) {
                                               if (loadingProgress == null) {
                                                 return child;
                                               } else {
                                                 return const Center(
-                                                  child:
-                                                      CircularProgressIndicator(
-                                                    color: Colors.red,
-                                                  ),
-                                                );
+                                                    child: Icon(Icons.image));
                                               }
                                             },
                                             '${store!.games[index].backgroundImage}',
@@ -141,8 +139,10 @@ class _GamesPageState extends State<GamesPage> {
                     ),
                     nextGamePage != null
                         ? IconButton(
-                            onPressed: () {
-                              store!.getGamesNextPage();
+                            onPressed: () async {
+                              debugPrint('${store!.isLoading}');
+
+                              await store!.getGamesNextPage();
                             },
                             icon: const Icon(
                               Icons.add,

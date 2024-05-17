@@ -52,11 +52,6 @@ class _GamePageState extends State<GamePage> {
             'Game Details',
             style: TextStyle(color: Colors.white),
           ),
-          actions: [
-            IconButton(onPressed: (){
-              Navigator.of(context).pop();
-            }, icon: const Icon(Icons.arrow_back_ios))
-          ],
           backgroundColor: const Color.fromRGBO(8, 47, 73, 1),
         ),
         backgroundColor: const Color.fromRGBO(8, 47, 73, 1),
@@ -72,13 +67,12 @@ class _GamePageState extends State<GamePage> {
                             ? const Padding(
                                 padding: EdgeInsets.only(top: 50),
                                 child: Center(
-                                    child: CircularProgressIndicator(
-                                  color: Colors.red,
-                                )),
+                                    child: Icon(Icons.image)),
                               )
                             : Opacity(
                                 opacity: 0.7,
                                 child: Image.network(
+                                  cacheWidth: 480,
                                   gamePageStore!.screenshots!.last,
                                   errorBuilder: (context, error, stackTrace) {
                                     return const Icon(
@@ -105,7 +99,10 @@ class _GamePageState extends State<GamePage> {
                                   ),
                                 );
                               }
-                            }, "${gameSelected.backgroundImage}")),
+                              
+                            }, 
+                            cacheWidth: 480,
+                            "${gameSelected.backgroundImage}")),
                       ),
                     ),
                   ],

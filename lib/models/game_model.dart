@@ -22,6 +22,7 @@ class GameModel {
   factory GameModel.allGameFromJson(Map<String, dynamic> json) {
     List<dynamic>? platformsJson = json['platforms'];
     List<dynamic>? genresJson = json['genres'];
+    
 
     List<String>? genresForm = genresJson!
         .map((e) {

@@ -6,6 +6,7 @@ GameModel gameSelected = GameModel();
 
 class GamePageStore with ChangeNotifier{
   List<GameModel> games = [];
+  bool isLoading = false;
   GameService service;
   GamePageStore({
     required this.service
@@ -24,11 +25,13 @@ class GamePageStore with ChangeNotifier{
 
   getGamesNextPage()async{
     try{
-      games.clear();
-      List<GameModel>? moreGames = await service.getNextPageGames();
-      games= moreGames!;
-      previousPage = previousGamePage;
-    notifyListeners();
+        games.clear();
+        List<GameModel>? moreGames = await service.getNextPageGames();
+        games= moreGames!;
+        previousPage = previousGamePage;
+        debugPrint('next page $games');
+        notifyListeners();
+      
     }catch(e){
       debugPrint("erro $e");
     }
@@ -38,6 +41,7 @@ class GamePageStore with ChangeNotifier{
     try{
       List<GameModel>? moreGames = await service.getPreviousPageGames();
       games = moreGames!;
+      debugPrint('previous page $games');
       notifyListeners();
     }catch(e){
       debugPrint("erro $e");
