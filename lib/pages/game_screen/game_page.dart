@@ -32,13 +32,14 @@ class _GamePageState extends State<GamePage> {
 
   _load() async {
     await gamePageStore!.getGameScreenShots(gameSelected.id);
+    await gamePageStore!.getAchievements();
     setState(() {
       length = gamePageStore!.screenshots!.length;
       _isLoading = false;
     });
   }
 
-  void disposePage(){
+  void disposePage() {
     super.dispose();
   }
 
@@ -52,6 +53,14 @@ class _GamePageState extends State<GamePage> {
             'Game Details',
             style: TextStyle(color: Colors.white),
           ),
+          leading: IconButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              icon: const Icon(
+                Icons.arrow_back,
+                color: Colors.white,
+              )),
           backgroundColor: const Color.fromRGBO(8, 47, 73, 1),
         ),
         backgroundColor: const Color.fromRGBO(8, 47, 73, 1),
@@ -66,8 +75,7 @@ class _GamePageState extends State<GamePage> {
                         child: _isLoading
                             ? const Padding(
                                 padding: EdgeInsets.only(top: 50),
-                                child: Center(
-                                    child: Icon(Icons.image)),
+                                child: Center(child: Icon(Icons.image)),
                               )
                             : Opacity(
                                 opacity: 0.7,
@@ -88,21 +96,23 @@ class _GamePageState extends State<GamePage> {
                         alignment: Alignment.bottomCenter,
                         child: SizedBox(
                             height: 130,
-                            child: Image.network(loadingBuilder:
-                                (context, child, loadingProgress) {
-                              if (loadingProgress == null) {
-                                return child;
-                              } else {
-                                return const Center(
-                                  child: CircularProgressIndicator(
-                                    color: Colors.red,
-                                  ),
-                                );
-                              }
-                              
-                            }, 
-                            cacheWidth: 480,
-                            "${gameSelected.backgroundImage}")),
+                            width: 300,
+                            child: Image.network(
+                              cacheWidth: 480,
+                              "${gameSelected.backgroundImage}",
+                              loadingBuilder:
+                                  (context, child, loadingProgress) {
+                                if (loadingProgress == null) {
+                                  return child;
+                                } else {
+                                  return const Center(
+                                    child: CircularProgressIndicator(
+                                      color: Colors.red,
+                                    ),
+                                  );
+                                }
+                              },
+                            )),
                       ),
                     ),
                   ],
@@ -111,18 +121,14 @@ class _GamePageState extends State<GamePage> {
                   height: 10,
                 ),
                 Container(
-                  width: 380,
                   decoration: BoxDecoration(
                       color: Colors.black,
                       borderRadius: BorderRadius.circular(16)),
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: Padding(
-                      padding: const EdgeInsets.all(5),
-                      child: Text(
-                        '${gameSelected.name}',
-                        style: const TextStyle(fontSize: 22, color: Colors.white),
-                      ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(5),
+                    child: Text(
+                      '${gameSelected.name}',
+                      style: const TextStyle(fontSize: 22, color: Colors.white),
                     ),
                   ),
                 ),
@@ -142,57 +148,65 @@ class _GamePageState extends State<GamePage> {
                 const SizedBox(
                   height: 10,
                 ),
-                Row(children: [
-                  for (int i = 0; i < gameSelected.genres!.length; i++) ...[
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                          color: Colors.black,
-                          borderRadius: BorderRadius.circular(16)),
-                      child: Padding(
-                        padding: const EdgeInsets.all(5),
-                        child: Text(
-                          gameSelected.genres![i],
-                          style: const TextStyle(
-                              fontSize: 20, color: Colors.white),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    )
-                  ],
-                ]),
+                SizedBox(
+                  height: 50,
+                  width: MediaQuery.of(context).size.width,
+                  child: ListView.builder(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.horizontal,
+                      physics: const BouncingScrollPhysics(),
+                      itemCount: gameSelected.genres!.length,
+                      itemBuilder: (context, index) {
+                        return Row(children: [
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                                color: Colors.black,
+                                borderRadius: BorderRadius.circular(16)),
+                            child: Padding(
+                              padding: const EdgeInsets.all(5),
+                              child: Text(
+                                gameSelected.genres![index],
+                                style: const TextStyle(
+                                    fontSize: 20, color: Colors.white),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          )
+                        ]);
+                      }),
+                ),
                 const SizedBox(
                   height: 10,
                 ),
                 Column(
-                      children: [
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        const Text(
-                          'Avalable Plataforms:',
-                          style: TextStyle(color: Colors.white, fontSize: 20),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        for (String plataform
-                            in gameSelected.plataformNames!) ...[
-                          Text(
-                            plataform,
-                            style: const TextStyle(
-                                color: Colors.white, fontSize: 20),
-                          ),
-                        ],
-                        const SizedBox(
-                          height: 10,
-                        ),
-                      ],
+                  children: [
+                    const SizedBox(
+                      height: 10,
                     ),
+                    const Text(
+                      'Avalable Plataforms:',
+                      style: TextStyle(color: Colors.white, fontSize: 20),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    for (String plataform in gameSelected.plataformNames!) ...[
+                      Text(
+                        plataform,
+                        style:
+                            const TextStyle(color: Colors.white, fontSize: 20),
+                      ),
+                    ],
+                    const SizedBox(
+                      height: 10,
+                    ),
+                  ],
+                ),
                 const SizedBox(
                   width: 10,
                 ),
@@ -224,7 +238,7 @@ class _GamePageState extends State<GamePage> {
                                           height: 180,
                                           width: 320,
                                           decoration: BoxDecoration(
-                                              color: Colors.white,
+                                              color: Colors.grey,
                                               border: Border.all(
                                                   color: Colors.white)),
                                           child: Image.network(
@@ -241,6 +255,7 @@ class _GamePageState extends State<GamePage> {
                                                 );
                                               }
                                             },
+                                            cacheWidth: 480,
                                             gamePageStore!.screenshots![index],
                                             height: 170,
                                           ),
@@ -257,6 +272,42 @@ class _GamePageState extends State<GamePage> {
                 const SizedBox(
                   height: 10,
                 ),
+                const Padding(
+                    padding: EdgeInsets.only(left: 10),
+                    child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          "Game Achievements",
+                          style: TextStyle(fontSize: 22, color: Colors.white),
+                        ))),
+                gameSelected.achievementImage != null
+                    ? GridView.builder(
+                        itemCount: gameSelected.achievementName!.length,
+                        physics: const BouncingScrollPhysics(),
+                        shrinkWrap: true,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2),
+                        itemBuilder: (context, index) {
+                          return Column(
+                            children: [
+                              Container(
+                                color: Colors.grey,
+                                width: 150,
+                                child: Image.network(
+                                    cacheWidth: 380,
+                                    gameSelected.achievementImage![index]),
+                              ),
+                              SizedBox(
+                                  width: 150,
+                                  child: Text(
+                                    gameSelected.achievementName![index],
+                                    style: const TextStyle(color: Colors.white),
+                                  )),
+                            ],
+                          );
+                        })
+                    : const Icon(Icons.error)
               ],
             ),
           ),

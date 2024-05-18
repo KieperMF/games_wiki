@@ -3,6 +3,9 @@ class GameModel {
   String? name;
   String? released;
   String? backgroundImage;
+  List<String>?  achievementName = [];
+  List<String>? achievementImage = [];
+  List<String>? achievementDescription = [];
   List<String>? plataformNames;
   int? rating;
   String? requirementsMinimum;
@@ -11,6 +14,9 @@ class GameModel {
 
   GameModel(
       {this.id ,this.name, 
+      this.achievementDescription,
+      this.achievementImage,
+      this.achievementName,
       this.genres,
       this.backgroundImage, 
       this.released, 

@@ -24,8 +24,13 @@ class _CreatorPageState extends State<CreatorPage> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Creator'),
+          title: const Text('Creator', style: TextStyle(color: Colors.white),),
+          leading: IconButton(onPressed: (){
+            Navigator.of(context).pop();
+          }, icon: const Icon(Icons.arrow_back), color: Colors.white,),
+          backgroundColor: const Color.fromRGBO(8, 47, 73, 1),
         ),
+        backgroundColor: const Color.fromRGBO(8, 47, 73, 1),
         body: SingleChildScrollView(
           child: Center(
             child: Column(
@@ -54,16 +59,24 @@ class _CreatorPageState extends State<CreatorPage> {
                 const SizedBox(
                   height: 20,
                 ),
-                Text(
-                  '${creatorSelected!.name}',
-                  style: const TextStyle(fontSize: 22),
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.black, 
+                    borderRadius: BorderRadius.circular(16)),
+                  child: Padding(
+                    padding: const EdgeInsets.all(5),
+                    child: Text(
+                      '${creatorSelected!.name}',
+                      style: const TextStyle(fontSize: 22, color: Colors.white),
+                    ),
+                  ),
                 ),
                 const SizedBox(
                   height: 20,
                 ),
                 const Text(
                   "Games Maded",
-                  style: TextStyle(fontSize: 24),
+                  style: TextStyle(fontSize: 22),
                 ),
                 const SizedBox(
                   height: 5,
@@ -81,7 +94,7 @@ class _CreatorPageState extends State<CreatorPage> {
                 ),
                 const Text(
                   "Positions",
-                  style: TextStyle(fontSize: 24),
+                  style: TextStyle(fontSize: 22),
                 ),
                 const SizedBox(
                   height: 5,

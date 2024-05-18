@@ -82,32 +82,39 @@ class _GamesPageState extends State<GamesPage> {
                                       SizedBox(
                                           height: 110,
                                           width: 160,
-                                          child: Image.network(
-                                            cacheWidth: 400,
-                                            //cacheHeight: 150,
-                                            loadingBuilder: (context, child,
-                                                loadingProgress) {
-                                              if (loadingProgress == null) {
-                                                return child;
-                                              } else {
-                                                return const Center(
-                                                    child: Icon(Icons.image));
-                                              }
-                                            },
-                                            '${store!.games[index].backgroundImage}',
-                                            errorBuilder:
-                                                (context, error, stackTrace) {
-                                              return const Icon(
-                                                Icons.image,
-                                                size: 140,
-                                              );
-                                            },
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(64),
+                                            child: Image.network(
+                                              cacheWidth: 400,
+                                              loadingBuilder: (context, child,
+                                                  loadingProgress) {
+                                                if (loadingProgress == null) {
+                                                  return child;
+                                                } else {
+                                                  return const Center(
+                                                      child: Icon(
+                                                    Icons.image,
+                                                    size: 100,
+                                                    color: Colors.black,
+                                                  ));
+                                                }
+                                              },
+                                              '${store!.games[index].backgroundImage}',
+                                              errorBuilder:
+                                                  (context, error, stackTrace) {
+                                                return const Icon(
+                                                  Icons.image,
+                                                  size: 140,
+                                                );
+                                              },
+                                            ),
                                           )),
                                       const SizedBox(
                                         width: 10,
                                       ),
                                       SizedBox(
-                                          width: 100,
+                                          width: 120,
                                           child: Text(
                                             "${store!.games[index].name}",
                                             style: const TextStyle(
@@ -140,8 +147,6 @@ class _GamesPageState extends State<GamesPage> {
                     nextGamePage != null
                         ? IconButton(
                             onPressed: () async {
-                              debugPrint('${store!.isLoading}');
-
                               await store!.getGamesNextPage();
                             },
                             icon: const Icon(

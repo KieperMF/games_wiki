@@ -6,7 +6,6 @@ GameModel gameSelected = GameModel();
 
 class GamePageStore with ChangeNotifier{
   List<GameModel> games = [];
-  bool isLoading = false;
   GameService service;
   GamePageStore({
     required this.service
@@ -54,6 +53,11 @@ class GamePageStore with ChangeNotifier{
     }catch(e){
       debugPrint("erro get screenshot $e");
     }
+  }
+
+  getAchievements()async{
+    await service.getGameAchievements();
+    debugPrint(gameSelected.achievementName![0]);
   }
 
 }
