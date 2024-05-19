@@ -215,8 +215,8 @@ class _GamePageState extends State<GamePage> {
                     child: Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          "Game Screenshots",
-                          style: TextStyle(fontSize: 22, color: Colors.white),
+                          "Screenshots",
+                          style: TextStyle(fontSize: 24, color: Colors.white),
                         ))),
                 SizedBox(
                   height: 200,
@@ -277,8 +277,8 @@ class _GamePageState extends State<GamePage> {
                     child: Align(
                         alignment: Alignment.centerLeft,
                         child: Text(
-                          "Game Achievements",
-                          style: TextStyle(fontSize: 22, color: Colors.white),
+                          "Achievements",
+                          style: TextStyle(fontSize: 24, color: Colors.white),
                         ))),
                 gameSelected.achievementImage != null
                     ? GridView.builder(
@@ -293,16 +293,17 @@ class _GamePageState extends State<GamePage> {
                             children: [
                               Container(
                                 color: Colors.grey,
-                                width: 150,
+                                width: 140,
+                                height: 140,
                                 child: Image.network(
                                     cacheWidth: 380,
                                     gameSelected.achievementImage![index]),
                               ),
                               SizedBox(
-                                  width: 150,
+                                  width: 140,
                                   child: Text(
                                     gameSelected.achievementName![index],
-                                    style: const TextStyle(color: Colors.white),
+                                    style: const TextStyle(color: Colors.white, fontSize: 16),
                                   )),
                             ],
                           );
