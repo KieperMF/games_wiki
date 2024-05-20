@@ -29,7 +29,6 @@ class GamePageStore with ChangeNotifier{
         games= moreGames!;
         previousPage = previousGamePage;
         notifyListeners();
-      
     }catch(e){
       debugPrint("erro $e");
     }
@@ -39,7 +38,6 @@ class GamePageStore with ChangeNotifier{
     try{
       List<GameModel>? moreGames = await service.getPreviousPageGames();
       games = moreGames!;
-      debugPrint('previous page $games');
       notifyListeners();
     }catch(e){
       debugPrint("erro $e");
@@ -57,7 +55,6 @@ class GamePageStore with ChangeNotifier{
 
   getAchievements()async{
     await service.getGameAchievements();
-    debugPrint(gameSelected.achievementName![0]);
   }
 
 }

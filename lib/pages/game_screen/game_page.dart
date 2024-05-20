@@ -39,10 +39,6 @@ class _GamePageState extends State<GamePage> {
     });
   }
 
-  void disposePage() {
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     gamePageStore = context.watch();
