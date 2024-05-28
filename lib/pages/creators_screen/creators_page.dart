@@ -39,15 +39,17 @@ class _CreatorsPageState extends State<CreatorsPage> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("Creators"),
+          backgroundColor: const Color.fromRGBO(100, 116, 139, 1),
+          title: const Text("Creators", style: TextStyle(color: Colors.white),),
         ),
+        backgroundColor: const Color.fromRGBO(71, 85, 105, 1),
         body: SingleChildScrollView(
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 creatorStore!.creators.isEmpty
@@ -69,7 +71,7 @@ class _CreatorsPageState extends State<CreatorsPage> {
                             children: [
                               Container(
                                 decoration:
-                                    const BoxDecoration(color: Colors.grey),
+                                    const BoxDecoration(color: Color.fromRGBO(148, 163, 184, 1)),
                                 width: 159,
                                 child: Column(children: [
                                   TextButton(

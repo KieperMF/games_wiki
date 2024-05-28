@@ -35,9 +35,9 @@ class _CreatorPageState extends State<CreatorPage> {
             icon: const Icon(Icons.arrow_back),
             color: Colors.white,
           ),
-          backgroundColor: const Color.fromRGBO(8, 47, 73, 1),
+          backgroundColor: const Color.fromRGBO(100, 116, 139, 1),
         ),
-        backgroundColor: const Color.fromRGBO(8, 47, 73, 1),
+        backgroundColor: const Color.fromRGBO(71, 85, 105, 1),
         body: SingleChildScrollView(
           child: Center(
             child: Column(
@@ -90,21 +90,21 @@ class _CreatorPageState extends State<CreatorPage> {
                     child: Column(
                       children: [
                         const Text(
-                          "Games Maded",
+                          "Positions",
                           style: TextStyle(fontSize: 22, color: Colors.white),
                         ),
                         const SizedBox(
                           height: 5,
                         ),
                         for (int i = 0;
-                            i < creatorSelected!.gamesMaded!.length;
+                            i < creatorSelected!.positions!.length;
                             i++) ...[
                           Text(
-                            creatorSelected!.gamesMaded![i],
+                            creatorSelected!.positions![i],
                             style: const TextStyle(
                                 fontSize: 20, color: Colors.white),
                           ),
-                        ],
+                        ]
                       ],
                     ),
                   ),
@@ -121,21 +121,21 @@ class _CreatorPageState extends State<CreatorPage> {
                     child: Column(
                       children: [
                         const Text(
-                          "Positions",
+                          "Games Maded",
                           style: TextStyle(fontSize: 22, color: Colors.white),
                         ),
                         const SizedBox(
                           height: 5,
                         ),
                         for (int i = 0;
-                            i < creatorSelected!.positions!.length;
+                            i < creatorSelected!.gamesMaded!.length;
                             i++) ...[
                           Text(
-                            creatorSelected!.positions![i],
+                            creatorSelected!.gamesMaded![i],
                             style: const TextStyle(
                                 fontSize: 20, color: Colors.white),
                           ),
-                        ]
+                        ],
                       ],
                     ),
                   ),

@@ -57,9 +57,9 @@ class _GamePageState extends State<GamePage> {
                 Icons.arrow_back,
                 color: Colors.white,
               )),
-          backgroundColor: const Color.fromRGBO(8, 47, 73, 1),
+          backgroundColor: const Color.fromRGBO(100, 116, 139, 1),
         ),
-        backgroundColor: const Color.fromRGBO(8, 47, 73, 1),
+        backgroundColor: const Color.fromRGBO(71, 85, 105, 1),
         body: SingleChildScrollView(
           child: Center(
             child: Column(
@@ -251,7 +251,7 @@ class _GamePageState extends State<GamePage> {
                                                 );
                                               }
                                             },
-                                            cacheWidth: 480,
+                                            cacheWidth: 500,
                                             gamePageStore!.screenshots![index],
                                             height: 170,
                                           ),
@@ -292,14 +292,14 @@ class _GamePageState extends State<GamePage> {
                                 width: 140,
                                 height: 140,
                                 child: Image.network(
-                                    cacheWidth: 380,
+                                    cacheWidth: 400,
                                     gameSelected.achievementImage![index]),
                               ),
                               SizedBox(
                                   width: 140,
                                   child: Text(
                                     gameSelected.achievementName![index],
-                                    style: const TextStyle(color: Colors.white, fontSize: 16),
+                                    style: const TextStyle(color: Colors.white, fontSize: 14),
                                   )),
                             ],
                           );

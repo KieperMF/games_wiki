@@ -33,7 +33,7 @@ class _NavigationBarControllerState extends State<NavigationBarController> {
           ),
           bottomNavigationBar: Container(
             decoration: BoxDecoration(
-              color: const Color.fromRGBO(63, 63, 70, 1.0),
+              color: const Color.fromRGBO(100, 116, 139, 1),
               boxShadow: [
                 BoxShadow(
                   blurRadius: 20,
@@ -50,7 +50,7 @@ class _NavigationBarControllerState extends State<NavigationBarController> {
                   hoverColor: Colors.grey[100]!,
                   curve: Curves.decelerate,
                   gap: 8,
-                  activeColor: const Color.fromRGBO(7, 89, 133, 1),
+                  activeColor: const Color.fromRGBO(100, 116, 139, 1),
                   iconSize: 24,
                   padding:
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 12),

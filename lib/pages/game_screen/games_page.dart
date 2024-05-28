@@ -38,10 +38,11 @@ class _GamesPageState extends State<GamesPage> {
     store = context.watch();
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.grey,
         appBar: AppBar(
-          title: const Text('Home Page'),
+          backgroundColor: const Color.fromRGBO(100, 116, 139, 1),
+          title: const Text('Games', style: TextStyle(color: Colors.white),),
         ),
+        backgroundColor: const Color.fromRGBO(71, 85, 105, 1),
         body: SingleChildScrollView(
           child: Center(
             child: Column(
@@ -70,6 +71,7 @@ class _GamesPageState extends State<GamesPage> {
                                   height: 150,
                                   width: 380,
                                   child: ElevatedButton(
+                                    style: const ButtonStyle(backgroundColor: WidgetStatePropertyAll(Color.fromRGBO(148, 163, 184, 1))),
                                     onPressed: () {
                                       gameSelected = store!.games[index];
                                       Navigator.push(
@@ -119,7 +121,7 @@ class _GamesPageState extends State<GamesPage> {
                                             "${store!.games[index].name}",
                                             style: const TextStyle(
                                                 color: Colors.black,
-                                                fontSize: 16),
+                                                fontSize: 18),
                                           ))
                                     ]),
                                   ),
@@ -139,6 +141,7 @@ class _GamesPageState extends State<GamesPage> {
                             icon: const Icon(
                               Icons.remove,
                               size: 36,
+                              color: Colors.white,
                             ))
                         : const Text(''),
                     const SizedBox(
@@ -152,6 +155,7 @@ class _GamesPageState extends State<GamesPage> {
                             icon: const Icon(
                               Icons.add,
                               size: 36,
+                              color: Colors.white,
                             ))
                         : const Text(''),
                   ],
