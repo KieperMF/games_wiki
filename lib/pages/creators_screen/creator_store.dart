@@ -13,10 +13,32 @@ class CreatorStore with ChangeNotifier{
 
   getCreators()async{
     try{
-      creators = await service.getAllCreators();
+      creators = await service.getCreators();
     notifyListeners();
     }catch(e){
       debugPrint("erro $e");
+    }
+  }
+
+  getCreatorsNextPage() async{
+    try{
+      creators = await service.getNextCreators();
+      notifyListeners();
+    }catch(e){
+      debugPrint("erro next creators $e");
+    }
+  }
+
+  getCreatorsPreviousPage() async{
+    try{
+      List<CreatorsModel>? newCreators = await service.getPreviousCreators();
+      if(newCreators.isNotEmpty){
+        creators.clear();
+        creators.addAll(newCreators);
+      }
+      notifyListeners();
+    }catch(e){
+      debugPrint("erro next creators $e");
     }
   }
 }

@@ -84,7 +84,7 @@ class _CreatorsPageState extends State<CreatorsPage> {
                                                   CreatorPage.create()));
                                     },
                                     child: SizedBox(
-                                      height: 150,
+                                      height: 140,
                                       child: Image.network(
                                         loadingBuilder:
                                             (context, child, loadingProgress) {
@@ -115,7 +115,7 @@ class _CreatorsPageState extends State<CreatorsPage> {
                                   Text(
                                     '${creatorStore!.creators[index].name}',
                                     style: const TextStyle(
-                                      fontSize: 18,
+                                      fontSize: 14,
                                     ),
                                   ),
                                 ]),
@@ -123,6 +123,36 @@ class _CreatorsPageState extends State<CreatorsPage> {
                             ],
                           );
                         }),
+                        Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                   previousCreatorsPage != null
+                        ? IconButton(
+                            onPressed: () {
+                              creatorStore!.getCreatorsPreviousPage();
+                            },
+                            icon: const Icon(
+                              Icons.remove,
+                              size: 36,
+                              color: Colors.white,
+                            ))
+                        : const Text(''),
+                    const SizedBox(
+                      width: 20,
+                    ),
+                    nextCreatorsPage != null
+                        ? IconButton(
+                            onPressed: () async {
+                              await creatorStore!.getCreatorsNextPage();
+                            },
+                            icon: const Icon(
+                              Icons.add,
+                              size: 36,
+                              color: Colors.white,
+                            ))
+                        : const Text(''),
+                  ],
+                )
               ],
             ),
           ),
