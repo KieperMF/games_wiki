@@ -71,7 +71,7 @@ class _CreatorsPageState extends State<CreatorsPage> {
                             children: [
                               Container(
                                 decoration:
-                                    const BoxDecoration(color: Color.fromRGBO(148, 163, 184, 1)),
+                                    const BoxDecoration(color: Color.fromRGBO(148, 163, 184, 1), borderRadius: BorderRadius.all(Radius.circular(16))),
                                 width: 159,
                                 child: Column(children: [
                                   TextButton(

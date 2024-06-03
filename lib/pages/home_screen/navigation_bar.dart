@@ -46,11 +46,9 @@ class _NavigationBarControllerState extends State<NavigationBarController> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
                 child: GNav(
-                  rippleColor: Colors.grey[300]!,
-                  hoverColor: Colors.grey[100]!,
-                  curve: Curves.decelerate,
+                  curve: Curves.easeInOut,
                   gap: 8,
-                  activeColor: const Color.fromRGBO(100, 116, 139, 1),
+                  activeColor: const Color.fromRGBO(3, 105, 161, 1),
                   iconSize: 24,
                   padding:
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
