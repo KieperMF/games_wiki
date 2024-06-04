@@ -35,9 +35,9 @@ class _CreatorPageState extends State<CreatorPage> {
             icon: const Icon(Icons.arrow_back),
             color: Colors.white,
           ),
-          backgroundColor: const Color.fromRGBO(100, 116, 139, 1),
+          backgroundColor: const Color.fromRGBO(38, 38, 38, 1),
         ),
-        backgroundColor: const Color.fromRGBO(71, 85, 105, 1),
+        backgroundColor: const Color.fromRGBO(23, 23, 23, 1),
         body: SingleChildScrollView(
           child: Center(
             child: Column(
@@ -81,11 +81,7 @@ class _CreatorPageState extends State<CreatorPage> {
                 const SizedBox(
                   height: 20,
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                      color: Colors.black,
-                      borderRadius: BorderRadius.circular(16)),
-                  child: Padding(
+                Padding(
                     padding: const EdgeInsets.all(5),
                     child: Column(
                       children: [
@@ -108,15 +104,10 @@ class _CreatorPageState extends State<CreatorPage> {
                       ],
                     ),
                   ),
-                ),
                 const SizedBox(
                   height: 20,
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                      color: Colors.black,
-                      borderRadius: BorderRadius.circular(16)),
-                  child: Padding(
+                Padding(
                     padding: const EdgeInsets.all(5),
                     child: Column(
                       children: [
@@ -139,7 +130,6 @@ class _CreatorPageState extends State<CreatorPage> {
                       ],
                     ),
                   ),
-                ),
               ],
             ),
           ),

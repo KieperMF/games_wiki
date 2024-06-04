@@ -25,6 +25,7 @@ class _NavigationBarControllerState extends State<NavigationBarController> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: const Color.fromRGBO(38, 38, 38, 0.1), 
           body: IndexedStack(
             index: _selectedItem, children: [
               GamesPage.create(),
@@ -32,49 +33,48 @@ class _NavigationBarControllerState extends State<NavigationBarController> {
             ],
           ),
           bottomNavigationBar: Container(
-            decoration: BoxDecoration(
-              color: const Color.fromRGBO(100, 116, 139, 1),
-              boxShadow: [
-                BoxShadow(
-                  blurRadius: 20,
-                  color: Colors.white.withOpacity(.1),
-                )
-              ],
-            ),
-            child: SafeArea(
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
-                child: GNav(
-                  curve: Curves.easeInOut,
-                  gap: 8,
-                  activeColor: const Color.fromRGBO(3, 105, 161, 1),
-                  iconSize: 24,
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(16)),
+                  color: Color.fromRGBO(38, 38, 38, 1)
+                ),
+              child: SafeArea(
+                child: Padding(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                  duration: const Duration(milliseconds: 600),
-                  tabBackgroundColor: Colors.grey.shade300,
-                  color: Colors.black,
-                  tabs: const [
-                    GButton(
-                      icon: Icons.videogame_asset_rounded,
-                      text: 'Games',
-                    ),
-                    GButton(
-                      icon: Icons.person,
-                      text: 'Creators',
-                    ),
-                  ],
-                  selectedIndex: _selectedItem,
-                  onTabChange: (index) {
-                    setState(() {
-                      _selectedItem = index;
-                    });
-                  },
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                  child: GNav(
+                    curve: Curves.easeInOut,
+                    gap: 8,
+                    activeColor: const Color.fromRGBO(10, 10, 10, 1),
+                    iconSize: 24,
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                    duration: const Duration(milliseconds: 600),
+                    tabBackgroundColor: Colors.white,
+                    color: Colors.black,
+                    tabs: const  [
+                      GButton(
+                        icon: Icons.videogame_asset_rounded,
+                        iconColor: Colors.white,
+                        text: 'Games',
+                      ),
+                       GButton(
+                        icon: Icons.person,
+                        iconColor: Colors.white,
+                        text: 'Creators',
+                      ),
+                    ],
+                    selectedIndex: _selectedItem,
+                    onTabChange: (index) {
+                      setState(() {
+                        _selectedItem = index;
+                      });
+                    },
+                  ),
                 ),
               ),
             ),
-          )),
+          ),
     );
   }
+  
 }

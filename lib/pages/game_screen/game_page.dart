@@ -57,9 +57,9 @@ class _GamePageState extends State<GamePage> {
                 Icons.arrow_back,
                 color: Colors.white,
               )),
-          backgroundColor: const Color.fromRGBO(100, 116, 139, 1),
+          backgroundColor: const Color.fromRGBO(38, 38, 38, 1),
         ),
-        backgroundColor: const Color.fromRGBO(71, 85, 105, 1),
+        backgroundColor: const Color.fromRGBO(23, 23, 23, 1),
         body: SingleChildScrollView(
           child: Center(
             child: Column(
@@ -71,7 +71,7 @@ class _GamePageState extends State<GamePage> {
                         child: _isLoading
                             ? const Padding(
                                 padding: EdgeInsets.only(top: 50),
-                                child: Center(child: Icon(Icons.image)),
+                                child: Center(child: Icon(Icons.image, color: Colors.white, size: 90,)),
                               )
                             : Opacity(
                                 opacity: 0.7,
@@ -81,6 +81,7 @@ class _GamePageState extends State<GamePage> {
                                   errorBuilder: (context, error, stackTrace) {
                                     return const Icon(
                                       Icons.error,
+                                      color: Colors.white,
                                       size: 150,
                                     );
                                   },
@@ -116,15 +117,18 @@ class _GamePageState extends State<GamePage> {
                 const SizedBox(
                   height: 10,
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                      color: Colors.black,
-                      borderRadius: BorderRadius.circular(16)),
-                  child: Padding(
-                    padding: const EdgeInsets.all(5),
-                    child: Text(
-                      '${gameSelected.name}',
-                      style: const TextStyle(fontSize: 22, color: Colors.white),
+                Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.black,
+                        borderRadius: BorderRadius.circular(16)),
+                    child: Padding(
+                      padding: const EdgeInsets.all(5),
+                      child: Text(
+                        '${gameSelected.name}',
+                        style: const TextStyle(fontSize: 22, color: Colors.white),
+                      ),
                     ),
                   ),
                 ),
@@ -157,11 +161,7 @@ class _GamePageState extends State<GamePage> {
                           const SizedBox(
                             width: 10,
                           ),
-                          Container(
-                            decoration: BoxDecoration(
-                                color: Colors.black,
-                                borderRadius: BorderRadius.circular(16)),
-                            child: Padding(
+                          Padding(
                               padding: const EdgeInsets.all(5),
                               child: Text(
                                 gameSelected.genres![index],
@@ -169,7 +169,6 @@ class _GamePageState extends State<GamePage> {
                                     fontSize: 20, color: Colors.white),
                               ),
                             ),
-                          ),
                           const SizedBox(
                             width: 10,
                           )
@@ -258,6 +257,7 @@ class _GamePageState extends State<GamePage> {
                                         )
                                       : const Icon(
                                           Icons.image,
+                                          color: Colors.grey,
                                           size: 180,
                                         ),
                             ],

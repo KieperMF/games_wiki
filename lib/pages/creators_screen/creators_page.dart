@@ -39,10 +39,10 @@ class _CreatorsPageState extends State<CreatorsPage> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: const Color.fromRGBO(100, 116, 139, 1),
+          backgroundColor: const Color.fromRGBO(38, 38, 38, 1),
           title: const Text("Creators", style: TextStyle(color: Colors.white),),
         ),
-        backgroundColor: const Color.fromRGBO(71, 85, 105, 1),
+        backgroundColor: const Color.fromRGBO(23, 23, 23, 1),
         body: SingleChildScrollView(
           child: Center(
             child: Column(
@@ -71,7 +71,8 @@ class _CreatorsPageState extends State<CreatorsPage> {
                             children: [
                               Container(
                                 decoration:
-                                    const BoxDecoration(color: Color.fromRGBO(148, 163, 184, 1), borderRadius: BorderRadius.all(Radius.circular(16))),
+                                    const BoxDecoration(color: Color.fromRGBO(38, 38, 38, 1), 
+                                    borderRadius: BorderRadius.all(Radius.circular(16))),
                                 width: 159,
                                 child: Column(children: [
                                   TextButton(
@@ -95,7 +96,7 @@ class _CreatorsPageState extends State<CreatorsPage> {
                                               child: Icon(
                                                 Icons.image,
                                                 size: 100,
-                                                color: Colors.black,
+                                                color: Colors.grey,
                                               ),
                                             );
                                           }
@@ -116,6 +117,7 @@ class _CreatorsPageState extends State<CreatorsPage> {
                                     '${creatorStore!.creators[index].name}',
                                     style: const TextStyle(
                                       fontSize: 14,
+                                      color: Colors.white
                                     ),
                                   ),
                                 ]),

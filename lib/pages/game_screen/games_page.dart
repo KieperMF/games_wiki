@@ -39,10 +39,10 @@ class _GamesPageState extends State<GamesPage> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: const Color.fromRGBO(100, 116, 139, 1),
+          backgroundColor: const Color.fromRGBO(38, 38, 38, 1),
           title: const Text('Games', style: TextStyle(color: Colors.white),),
         ),
-        backgroundColor: const Color.fromRGBO(71, 85, 105, 1),
+        backgroundColor: const Color.fromRGBO(23, 23, 23, 1),
         body: SingleChildScrollView(
           child: Center(
             child: Column(
@@ -71,7 +71,7 @@ class _GamesPageState extends State<GamesPage> {
                                   height: 150,
                                   width: 380,
                                   child: ElevatedButton(
-                                    style: const ButtonStyle(backgroundColor: WidgetStatePropertyAll(Color.fromRGBO(148, 163, 184, 1))),
+                                    style: const ButtonStyle(backgroundColor: WidgetStatePropertyAll(Color.fromRGBO(38, 38, 38, 1))),
                                     onPressed: () {
                                       gameSelected = store!.games[index];
                                       Navigator.push(
@@ -98,7 +98,7 @@ class _GamesPageState extends State<GamesPage> {
                                                       child: Icon(
                                                     Icons.image,
                                                     size: 100,
-                                                    color: Colors.black,
+                                                    color: Colors.white,
                                                   ));
                                                 }
                                               },
@@ -120,7 +120,7 @@ class _GamesPageState extends State<GamesPage> {
                                           child: Text(
                                             "${store!.games[index].name}",
                                             style: const TextStyle(
-                                                color: Colors.black,
+                                                color: Colors.white,
                                                 fontSize: 18),
                                           ))
                                     ]),
