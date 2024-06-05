@@ -33,6 +33,7 @@ class _GamePageState extends State<GamePage> {
   _load() async {
     await gamePageStore!.getGameScreenShots(gameSelected.id);
     await gamePageStore!.getAchievements();
+    //await gamePageStore!.getReleatedGames();
     setState(() {
       length = gamePageStore!.screenshots!.length;
       _isLoading = false;
@@ -71,7 +72,12 @@ class _GamePageState extends State<GamePage> {
                         child: _isLoading
                             ? const Padding(
                                 padding: EdgeInsets.only(top: 50),
-                                child: Center(child: Icon(Icons.image, color: Colors.white, size: 90,)),
+                                child: Center(
+                                    child: Icon(
+                                  Icons.image,
+                                  color: Colors.white,
+                                  size: 90,
+                                )),
                               )
                             : Opacity(
                                 opacity: 0.7,
@@ -127,7 +133,8 @@ class _GamePageState extends State<GamePage> {
                       padding: const EdgeInsets.all(5),
                       child: Text(
                         '${gameSelected.name}',
-                        style: const TextStyle(fontSize: 22, color: Colors.white),
+                        style:
+                            const TextStyle(fontSize: 22, color: Colors.white),
                       ),
                     ),
                   ),
@@ -162,45 +169,41 @@ class _GamePageState extends State<GamePage> {
                             width: 10,
                           ),
                           Padding(
-                              padding: const EdgeInsets.all(5),
-                              child: Text(
-                                gameSelected.genres![index],
-                                style: const TextStyle(
-                                    fontSize: 20, color: Colors.white),
-                              ),
+                            padding: const EdgeInsets.all(5),
+                            child: Text(
+                              gameSelected.genres![index],
+                              style: const TextStyle(
+                                  fontSize: 20, color: Colors.white),
                             ),
+                          ),
                           const SizedBox(
                             width: 10,
                           )
                         ]);
                       }),
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Column(
-                  children: [
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    const Text(
-                      'Avalable Plataforms:',
-                      style: TextStyle(color: Colors.white, fontSize: 20),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    for (String plataform in gameSelected.plataformNames!) ...[
-                      Text(
-                        plataform,
-                        style:
-                            const TextStyle(color: Colors.white, fontSize: 20),
-                      ),
-                    ],
-                    const SizedBox(
-                      height: 10,
-                    ),
-                  ],
+                SizedBox(
+                  height: 50,
+                  width: MediaQuery.of(context).size.width,
+                  child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      physics: const BouncingScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: gameSelected.plataformNames!.length,
+                      itemBuilder: (context, index) {
+                        return Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(10),
+                              child: Text(
+                                gameSelected.plataformNames![index],
+                                style: const TextStyle(
+                                    color: Colors.white, fontSize: 20),
+                              ),
+                            ),
+                          ],
+                        );
+                      }),
                 ),
                 const SizedBox(
                   width: 10,
@@ -265,46 +268,54 @@ class _GamePageState extends State<GamePage> {
                         );
                       }),
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
-                const Padding(
-                    padding: EdgeInsets.only(left: 10),
-                    child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          "Achievements",
-                          style: TextStyle(fontSize: 24, color: Colors.white),
-                        ))),
                 gameSelected.achievementImage != null
-                    ? GridView.builder(
-                        itemCount: gameSelected.achievementName!.length,
-                        physics: const BouncingScrollPhysics(),
-                        shrinkWrap: true,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2),
-                        itemBuilder: (context, index) {
-                          return Column(
-                            children: [
-                              Container(
-                                color: Colors.grey,
-                                width: 140,
-                                height: 140,
-                                child: Image.network(
-                                    cacheWidth: 400,
-                                    gameSelected.achievementImage![index]),
-                              ),
-                              SizedBox(
-                                  width: 140,
+                    ? Column(
+                        children: [
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          const Padding(
+                              padding: EdgeInsets.only(left: 10),
+                              child: Align(
+                                  alignment: Alignment.centerLeft,
                                   child: Text(
-                                    gameSelected.achievementName![index],
-                                    style: const TextStyle(color: Colors.white, fontSize: 14),
-                                  )),
-                            ],
-                          );
-                        })
-                    : const Icon(Icons.error)
+                                    "Achievements",
+                                    style: TextStyle(
+                                        fontSize: 24, color: Colors.white),
+                                  ))),
+                          GridView.builder(
+                              itemCount: gameSelected.achievementName!.length,
+                              physics: const BouncingScrollPhysics(),
+                              shrinkWrap: true,
+                              gridDelegate:
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 2),
+                              itemBuilder: (context, index) {
+                                return Column(
+                                  children: [
+                                    Container(
+                                      color: Colors.grey,
+                                      width: 140,
+                                      height: 140,
+                                      child: Image.network(
+                                          cacheWidth: 400,
+                                          gameSelected
+                                              .achievementImage![index]),
+                                    ),
+                                    SizedBox(
+                                        width: 140,
+                                        child: Text(
+                                          gameSelected.achievementName![index],
+                                          style: const TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 14),
+                                        )),
+                                  ],
+                                );
+                              })
+                        ],
+                      )
+                    : const Text('')
               ],
             ),
           ),

@@ -25,7 +25,7 @@ class _CreatorPageState extends State<CreatorPage> {
       child: Scaffold(
         appBar: AppBar(
           title: const Text(
-            'Creator',
+            'Creator Details',
             style: TextStyle(color: Colors.white),
           ),
           leading: IconButton(
@@ -109,25 +109,28 @@ class _CreatorPageState extends State<CreatorPage> {
                 ),
                 Padding(
                     padding: const EdgeInsets.all(5),
-                    child: Column(
-                      children: [
-                        const Text(
-                          "Games Maded",
-                          style: TextStyle(fontSize: 22, color: Colors.white),
-                        ),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        for (int i = 0;
-                            i < creatorSelected!.gamesMaded!.length;
-                            i++) ...[
-                          Text(
-                            creatorSelected!.gamesMaded![i],
-                            style: const TextStyle(
-                                fontSize: 20, color: Colors.white),
+                    child: Container(
+                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(16), border: Border.all(color: Colors.grey)),
+                      child: Column(
+                        children: [
+                          const Text(
+                            "Games Maded",
+                            style: TextStyle(fontSize: 22, color: Colors.white),
                           ),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          for (int i = 0;
+                              i < creatorSelected!.gamesMaded!.length;
+                              i++) ...[
+                            Text(
+                              creatorSelected!.gamesMaded![i],
+                              style: const TextStyle(
+                                  fontSize: 20, color: Colors.white),
+                            ),
+                          ],
                         ],
-                      ],
+                      ),
                     ),
                   ),
               ],
@@ -138,3 +141,5 @@ class _CreatorPageState extends State<CreatorPage> {
     );
   }
 }
+
+

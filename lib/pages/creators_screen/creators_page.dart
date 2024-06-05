@@ -38,10 +38,11 @@ class _CreatorsPageState extends State<CreatorsPage> {
     creatorStore = context.watch();
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
+        /*appBar: AppBar(
+          centerTitle: true,
           backgroundColor: const Color.fromRGBO(38, 38, 38, 1),
           title: const Text("Creators", style: TextStyle(color: Colors.white),),
-        ),
+        ),*/
         backgroundColor: const Color.fromRGBO(23, 23, 23, 1),
         body: SingleChildScrollView(
           child: Center(
@@ -70,19 +71,17 @@ class _CreatorsPageState extends State<CreatorsPage> {
                           return Column(
                             children: [
                               Container(
-                                decoration:
-                                    const BoxDecoration(color: Color.fromRGBO(38, 38, 38, 1), 
-                                    borderRadius: BorderRadius.all(Radius.circular(16))),
+                                decoration: const BoxDecoration(
+                                    color: Color.fromRGBO(38, 38, 38, 1),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(16))),
                                 width: 159,
                                 child: Column(children: [
                                   TextButton(
                                     onPressed: () {
                                       creatorSelected =
                                           creatorStore!.creators[index];
-                                      Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  CreatorPage.create()));
+                                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => CreatorPage.create()));
                                     },
                                     child: SizedBox(
                                       height: 140,
@@ -116,19 +115,17 @@ class _CreatorsPageState extends State<CreatorsPage> {
                                   Text(
                                     '${creatorStore!.creators[index].name}',
                                     style: const TextStyle(
-                                      fontSize: 14,
-                                      color: Colors.white
-                                    ),
+                                        fontSize: 14, color: Colors.white),
                                   ),
                                 ]),
                               ),
                             ],
                           );
                         }),
-                        Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                   previousCreatorsPage != null
+                    previousCreatorsPage != null
                         ? IconButton(
                             onPressed: () {
                               creatorStore!.getCreatorsPreviousPage();

@@ -6,6 +6,7 @@ GameModel gameSelected = GameModel();
 
 class GamePageStore with ChangeNotifier{
   List<GameModel> games = [];
+  List<GameModel> releatedGames = [];
   GameService service;
   GamePageStore({
     required this.service
@@ -21,6 +22,15 @@ class GamePageStore with ChangeNotifier{
       debugPrint("erro $e");
     }
   }
+
+  /*getReleatedGames()async{
+    try{
+      releatedGames = (await service.getReleatedGames(gameSelected.id!))!;
+    notifyListeners();
+    }catch(e){
+      debugPrint("erro $e");
+    }
+  }*/
 
   getGamesNextPage()async{
     try{

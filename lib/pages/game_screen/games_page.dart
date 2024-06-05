@@ -38,10 +38,11 @@ class _GamesPageState extends State<GamesPage> {
     store = context.watch();
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
+        /*appBar: AppBar(
+          centerTitle: true,
           backgroundColor: const Color.fromRGBO(38, 38, 38, 1),
           title: const Text('Games', style: TextStyle(color: Colors.white),),
-        ),
+        ),*/
         backgroundColor: const Color.fromRGBO(23, 23, 23, 1),
         body: SingleChildScrollView(
           child: Center(

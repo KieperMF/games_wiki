@@ -106,4 +106,18 @@ class GameService {
       return [];
     }
   }
+
+  /*Future<List<GameModel>?> getReleatedGames(int id) async {
+    try {
+      final response = await http.getData(
+          path:
+              'https://api.rawg.io/api/games/$id/game-series?key=f40f66dd22c542d2b422b922b714f749');
+      final decode = jsonDecode(response.body)['results'] as List;
+      games = decode.map((e) => GameModel.allGameFromJson(e)).toList();
+      return games;
+    } catch (e) {
+      debugPrint('erro service: $e');
+      return [];
+    }
+  }*/
 }
