@@ -23,14 +23,14 @@ class GamePageStore with ChangeNotifier{
     }
   }
 
-  /*getReleatedGames()async{
+  getReleatedGames()async{
     try{
       releatedGames = (await service.getReleatedGames(gameSelected.id!))!;
     notifyListeners();
     }catch(e){
       debugPrint("erro $e");
     }
-  }*/
+  }
 
   getGamesNextPage()async{
     try{

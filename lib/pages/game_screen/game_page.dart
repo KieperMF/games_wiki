@@ -33,7 +33,7 @@ class _GamePageState extends State<GamePage> {
   _load() async {
     await gamePageStore!.getGameScreenShots(gameSelected.id);
     await gamePageStore!.getAchievements();
-    //await gamePageStore!.getReleatedGames();
+    await gamePageStore!.getReleatedGames();
     setState(() {
       length = gamePageStore!.screenshots!.length;
       _isLoading = false;
@@ -315,7 +315,85 @@ class _GamePageState extends State<GamePage> {
                               })
                         ],
                       )
-                    : const Text('')
+                    : const Text(''),
+                const SizedBox(
+                  height: 10,
+                ),
+                gamePageStore!.releatedGames.isNotEmpty
+                    ? Column(
+                        children: [
+                          const Padding(
+                              padding: EdgeInsets.only(left: 10),
+                              child: Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    "Releated Games",
+                                    style: TextStyle(
+                                        fontSize: 24, color: Colors.white),
+                                  ))),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          SizedBox(
+                            height: 230,
+                            width: MediaQuery.of(context).size.width,
+                            child: ListView.builder(
+                                shrinkWrap: true,
+                                scrollDirection: Axis.horizontal,
+                                physics: const BouncingScrollPhysics(),
+                                itemCount: gamePageStore!.releatedGames.length,
+                                itemBuilder: (context, index) {
+                                  return Padding(
+                                    padding: const EdgeInsets.all(10),
+                                    child: Column(children: [
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
+                                      Container(
+                                          decoration: BoxDecoration(
+                                              border: Border.all(
+                                                  color: Colors.grey)),
+                                          height: 130,
+                                          width: 250,
+                                          child: Image.network(
+                                            cacheWidth: 480,
+                                            "${gamePageStore!.releatedGames[index].backgroundImage}",
+                                            loadingBuilder: (context, child,
+                                                loadingProgress) {
+                                              if (loadingProgress == null) {
+                                                return child;
+                                              } else {
+                                                return const Center(
+                                                  child:
+                                                      CircularProgressIndicator(
+                                                    color: Colors.red,
+                                                  ),
+                                                );
+                                              }
+                                            },
+                                          )),
+                                      Padding(
+                                        padding: const EdgeInsets.all(5),
+                                        child: SizedBox(
+                                          width: 230,
+                                          child: Text(
+                                            '${gamePageStore!.releatedGames[index].name}',
+                                            style: const TextStyle(
+                                                fontSize: 20,
+                                                color: Colors.white),
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        width: 10,
+                                      )
+                                    ]),
+                                  );
+                                }),
+                          ),
+                        ],
+                      )
+                    : const Text(''),
               ],
             ),
           ),
