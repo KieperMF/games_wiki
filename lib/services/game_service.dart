@@ -114,10 +114,9 @@ class GameService {
               'https://api.rawg.io/api/games/$id/game-series?key=f40f66dd22c542d2b422b922b714f749');
       final decode = jsonDecode(response.body)['results'] as List;
       games = decode.map((e) => GameModel.allGameFromJson(e)).toList();
-      debugPrint('${games![0].name}');
       return games;
     } catch (e) {
-      debugPrint('erro service: $e');
+      debugPrint('erro service realeted games: $e');
       return [];
     }
   }

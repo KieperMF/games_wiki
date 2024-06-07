@@ -70,15 +70,19 @@ class _GamePageState extends State<GamePage> {
                     SizedBox(
                         width: MediaQuery.of(context).size.width,
                         child: _isLoading
-                            ? const Padding(
-                                padding: EdgeInsets.only(top: 50),
-                                child: Center(
-                                    child: Icon(
+                            ? Center(
+                                child: Container(
+                                width: MediaQuery.of(context).size.width,
+                                height: 200,
+                                decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.grey),
+                                    color: Colors.grey),
+                                child: const Icon(
                                   Icons.image,
                                   color: Colors.white,
                                   size: 90,
-                                )),
-                              )
+                                ),
+                              ))
                             : Opacity(
                                 opacity: 0.7,
                                 child: Image.network(
@@ -216,58 +220,95 @@ class _GamePageState extends State<GamePage> {
                           "Screenshots",
                           style: TextStyle(fontSize: 24, color: Colors.white),
                         ))),
-                SizedBox(
-                  height: 200,
-                  child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      physics: const BouncingScrollPhysics(),
-                      itemCount: length,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.all(10),
-                          child: Row(
-                            children: [
-                              _isLoading
-                                  ? const CircularProgressIndicator(
-                                      color: Colors.red,
-                                    )
-                                  : gamePageStore!.screenshots!.isNotEmpty
-                                      ? Container(
-                                          height: 180,
-                                          width: 320,
-                                          decoration: BoxDecoration(
-                                              color: Colors.grey,
-                                              border: Border.all(
-                                                  color: Colors.white)),
-                                          child: Image.network(
-                                            loadingBuilder: (context, child,
-                                                loadingProgress) {
-                                              if (loadingProgress == null) {
-                                                return child;
-                                              } else {
-                                                return const Center(
-                                                  child:
-                                                      CircularProgressIndicator(
-                                                    color: Colors.red,
+                length > 0
+                    ? Column(
+                        children: [
+                          SizedBox(
+                            height: 200,
+                            child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                physics: const BouncingScrollPhysics(),
+                                itemCount: length,
+                                itemBuilder: (context, index) {
+                                  return Padding(
+                                    padding: const EdgeInsets.all(10),
+                                    child: Row(
+                                      children: [
+                                        _isLoading
+                                            ? const CircularProgressIndicator(
+                                                color: Colors.red,
+                                              )
+                                            : gamePageStore!
+                                                    .screenshots!.isNotEmpty
+                                                ? Container(
+                                                    height: 180,
+                                                    width: 320,
+                                                    decoration: BoxDecoration(
+                                                        color: Colors.grey,
+                                                        border: Border.all(
+                                                            color:
+                                                                Colors.white)),
+                                                    child: Image.network(
+                                                      loadingBuilder: (context,
+                                                          child,
+                                                          loadingProgress) {
+                                                        if (loadingProgress ==
+                                                            null) {
+                                                          return child;
+                                                        } else {
+                                                          return const Center(
+                                                            child:
+                                                                CircularProgressIndicator(
+                                                              color: Colors.red,
+                                                            ),
+                                                          );
+                                                        }
+                                                      },
+                                                      cacheWidth: 500,
+                                                      gamePageStore!
+                                                          .screenshots![index],
+                                                      height: 170,
+                                                    ),
+                                                  )
+                                                : const Icon(
+                                                    Icons.image,
+                                                    color: Colors.grey,
+                                                    size: 180,
                                                   ),
-                                                );
-                                              }
-                                            },
-                                            cacheWidth: 500,
-                                            gamePageStore!.screenshots![index],
-                                            height: 170,
-                                          ),
-                                        )
-                                      : const Icon(
-                                          Icons.image,
-                                          color: Colors.grey,
-                                          size: 180,
-                                        ),
-                            ],
+                                      ],
+                                    ),
+                                  );
+                                }),
                           ),
-                        );
-                      }),
-                ),
+                        ],
+                      )
+                    : SizedBox(
+                        height: 200,
+                        child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            physics: const BouncingScrollPhysics(),
+                            itemCount: 4,
+                            itemBuilder: (context, index) {
+                              return Padding(
+                                padding: const EdgeInsets.all(10),
+                                child: Row(
+                                  children: [
+                                    Container(
+                                        height: 180,
+                                        width: 320,
+                                        decoration: BoxDecoration(
+                                            color: Colors.grey,
+                                            border: Border.all(
+                                                color: Colors.white)),
+                                        child: const Icon(
+                                          Icons.image_not_supported_rounded,
+                                          size: 50,
+                                        ))
+                                  ],
+                                ),
+                              );
+                            }),
+                      ),
                 gameSelected.achievementImage != null
                     ? Column(
                         children: [
