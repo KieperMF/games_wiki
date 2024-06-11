@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:games_wiki/core/inject.dart';
 import 'package:games_wiki/pages/game_screen/game_page.dart';
@@ -38,16 +39,36 @@ class _GamesPageState extends State<GamesPage> {
     store = context.watch();
     return SafeArea(
       child: Scaffold(
-        /*appBar: AppBar(
-          centerTitle: true,
-          backgroundColor: const Color.fromRGBO(38, 38, 38, 1),
-          title: const Text('Games', style: TextStyle(color: Colors.white),),
-        ),*/
         backgroundColor: const Color.fromRGBO(23, 23, 23, 1),
         body: SingleChildScrollView(
           child: Center(
             child: Column(
               children: [
+                const SizedBox(
+                  height: 10,
+                ),
+                CarouselSlider.builder(
+                    itemCount: 6,
+                    itemBuilder: (BuildContext context, int itemIndex,
+                        int pageViewIndex) {
+                      return Container(
+                          width: 320,
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.grey)),
+                          child: Image.asset('lib/assets/$itemIndex.jpg'));
+                    },
+                    options: CarouselOptions(
+                        height: 180,
+                        autoPlayCurve: Curves.easeIn,
+                        autoPlay: true,
+                        autoPlayAnimationDuration:
+                            const Duration(milliseconds: 1000))),
+                const SizedBox(
+                  height: 10,
+                ),
+                const Divider(
+                  color: Colors.grey,
+                ),
                 const SizedBox(
                   height: 10,
                 ),
@@ -72,7 +93,9 @@ class _GamesPageState extends State<GamesPage> {
                                   height: 150,
                                   width: 380,
                                   child: ElevatedButton(
-                                    style: const ButtonStyle(backgroundColor: WidgetStatePropertyAll(Color.fromRGBO(38, 38, 38, 1))),
+                                    style: const ButtonStyle(
+                                        backgroundColor: WidgetStatePropertyAll(
+                                            Color.fromRGBO(38, 38, 38, 1))),
                                     onPressed: () {
                                       gameSelected = store!.games[index];
                                       Navigator.push(
