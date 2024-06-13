@@ -3,6 +3,7 @@ import 'package:games_wiki/core/inject.dart';
 import 'package:games_wiki/pages/game_screen/game_page_store.dart';
 import 'package:games_wiki/services/game_service.dart';
 import 'package:provider/provider.dart';
+import 'package:widget_zoom/widget_zoom.dart';
 
 class GamePage extends StatefulWidget {
   const GamePage({super.key});
@@ -248,26 +249,29 @@ class _GamePageState extends State<GamePage> {
                                                         border: Border.all(
                                                             color:
                                                                 Colors.white)),
-                                                    child: Image.network(
-                                                      loadingBuilder: (context,
-                                                          child,
-                                                          loadingProgress) {
-                                                        if (loadingProgress ==
-                                                            null) {
-                                                          return child;
-                                                        } else {
-                                                          return const Center(
-                                                            child:
-                                                                CircularProgressIndicator(
-                                                              color: Colors.red,
-                                                            ),
-                                                          );
-                                                        }
-                                                      },
-                                                      cacheWidth: 500,
-                                                      gamePageStore!
-                                                          .screenshots![index],
-                                                      height: 170,
+                                                    child: WidgetZoom(
+                                                      heroAnimationTag: '$index',
+                                                      zoomWidget: Image.network(
+                                                        loadingBuilder: (context,
+                                                            child,
+                                                            loadingProgress) {
+                                                          if (loadingProgress ==
+                                                              null) {
+                                                            return child;
+                                                          } else {
+                                                            return const Center(
+                                                              child:
+                                                                  CircularProgressIndicator(
+                                                                color: Colors.red,
+                                                              ),
+                                                            );
+                                                          }
+                                                        },
+                                                        cacheWidth: 600,
+                                                        gamePageStore!
+                                                            .screenshots![index],
+                                                        height: 170,
+                                                      ),
                                                     ),
                                                   )
                                                 : const Icon(

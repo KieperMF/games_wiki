@@ -59,10 +59,10 @@ class _GamesPageState extends State<GamesPage> {
                     },
                     options: CarouselOptions(
                         height: 180,
-                        autoPlayCurve: Curves.easeIn,
+                        autoPlayCurve: Curves.easeInOut,
                         autoPlay: true,
                         autoPlayAnimationDuration:
-                            const Duration(milliseconds: 1000))),
+                            const Duration(milliseconds: 1500))),
                 const SizedBox(
                   height: 10,
                 ),
@@ -78,79 +78,134 @@ class _GamesPageState extends State<GamesPage> {
                           _load();
                         },
                         icon: const Icon(Icons.refresh))
-                    : ListView.builder(
+                    : GridView.builder(
                         shrinkWrap: true,
                         scrollDirection: Axis.vertical,
                         physics: const BouncingScrollPhysics(),
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                        ),
                         itemCount: store!.games.length,
                         itemBuilder: (context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.all(10),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                SizedBox(
-                                  height: 150,
-                                  width: 380,
-                                  child: ElevatedButton(
-                                    style: const ButtonStyle(
-                                        backgroundColor: WidgetStatePropertyAll(
-                                            Color.fromRGBO(38, 38, 38, 1))),
-                                    onPressed: () {
-                                      gameSelected = store!.games[index];
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  GamePage.create()));
-                                    },
-                                    child: Row(children: [
-                                      SizedBox(
-                                          height: 110,
-                                          width: 160,
-                                          child: ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(64),
-                                            child: Image.network(
-                                              cacheWidth: 400,
-                                              loadingBuilder: (context, child,
-                                                  loadingProgress) {
-                                                if (loadingProgress == null) {
-                                                  return child;
-                                                } else {
-                                                  return const Center(
-                                                      child: Icon(
-                                                    Icons.image,
-                                                    size: 100,
-                                                    color: Colors.white,
-                                                  ));
-                                                }
-                                              },
-                                              '${store!.games[index].backgroundImage}',
-                                              errorBuilder:
-                                                  (context, error, stackTrace) {
-                                                return const Icon(
-                                                  Icons.image,
-                                                  size: 140,
-                                                );
-                                              },
+                          return TextButton(
+                            onPressed: () {
+                              gameSelected = store!.games[index];
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => GamePage.create()));
+                            },
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(16),
+                              child: SizedBox(
+                                //height: 180,
+                                child: Stack(
+                                  children: [
+                                    Image.network(
+                                      cacheHeight: 500,
+                                      cacheWidth: 470,
+                                      loadingBuilder:
+                                          (context, child, loadingProgress) {
+                                        if (loadingProgress == null) {
+                                          return child;
+                                        } else {
+                                          return const Center(
+                                              child: Icon(
+                                            Icons.image,
+                                            size: 100,
+                                            color: Colors.white,
+                                          ));
+                                        }
+                                      },
+                                      '${store!.games[index].backgroundImage}',
+                                      errorBuilder: (context, error, stackTrace) {
+                                        return const Icon(
+                                          Icons.image_not_supported_rounded,
+                                          size: 140,
+                                        );
+                                      },
+                                    ),
+                                    Align(
+                                      alignment: Alignment.bottomCenter,
+                                      child: Container(
+                                          height: 50,
+                                          decoration: const BoxDecoration(
+                                            color: const Color.fromRGBO(
+                                                113, 113, 122, 0.5),
+                                          ),
+                                          width: 200,
+                                          child: Padding(
+                                            padding: EdgeInsets.all(5),
+                                            child: Text(
+                                              textAlign: TextAlign.center,
+                                              "${store!.games[index].name}",
+                                              style: const TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 16),
                                             ),
                                           )),
-                                      const SizedBox(
-                                        width: 10,
-                                      ),
-                                      SizedBox(
-                                          width: 120,
-                                          child: Text(
-                                            "${store!.games[index].name}",
-                                            style: const TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 18),
-                                          ))
-                                    ]),
-                                  ),
+                                    )
+                                    /*ElevatedButton(
+                                                style: const ButtonStyle(
+                                                    backgroundColor: WidgetStatePropertyAll(
+                                                        Color.fromRGBO(38, 38, 38, 1))),
+                                                onPressed: () {
+                                                  gameSelected = store!.games[index];
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              GamePage.create()));
+                                                },
+                                                child: Row(children: [
+                                                  SizedBox(
+                                                      height: 110,
+                                                      width: 160,
+                                                      child: ClipRRect(
+                                                        borderRadius:
+                                                            BorderRadius.circular(64),
+                                                        child: Image.network(
+                                                          cacheWidth: 400,
+                                                          loadingBuilder: (context, child,
+                                                              loadingProgress) {
+                                                            if (loadingProgress == null) {
+                                                              return child;
+                                                            } else {
+                                                              return const Center(
+                                                                  child: Icon(
+                                                                Icons.image,
+                                                                size: 100,
+                                                                color: Colors.white,
+                                                              ));
+                                                            }
+                                                          },
+                                                          '${store!.games[index].backgroundImage}',
+                                                          errorBuilder:
+                                                              (context, error, stackTrace) {
+                                                            return const Icon(
+                                                              Icons.image,
+                                                              size: 140,
+                                                            );
+                                                          },
+                                                        ),
+                                                      )),
+                                                  const SizedBox(
+                                                    width: 10,
+                                                  ),
+                                                  /*SizedBox(
+                                                      width: 120,
+                                                      child: Text(
+                                                        "${store!.games[index].name}",
+                                                        style: const TextStyle(
+                                                            color: Colors.white,
+                                                            fontSize: 18),
+                                                      ))*/
+                                                ]),
+                                              ),*/
+                                  ],
                                 ),
-                              ],
+                              ),
                             ),
                           );
                         }),
@@ -163,7 +218,7 @@ class _GamesPageState extends State<GamesPage> {
                               store!.getGamesPreviousPage();
                             },
                             icon: const Icon(
-                              Icons.remove,
+                              Icons.arrow_circle_left_rounded,
                               size: 36,
                               color: Colors.white,
                             ))
@@ -177,7 +232,7 @@ class _GamesPageState extends State<GamesPage> {
                               await store!.getGamesNextPage();
                             },
                             icon: const Icon(
-                              Icons.add,
+                              Icons.arrow_circle_right_rounded,
                               size: 36,
                               color: Colors.white,
                             ))
