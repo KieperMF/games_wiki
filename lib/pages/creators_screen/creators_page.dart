@@ -38,11 +38,6 @@ class _CreatorsPageState extends State<CreatorsPage> {
     creatorStore = context.watch();
     return SafeArea(
       child: Scaffold(
-        /*appBar: AppBar(
-          centerTitle: true,
-          backgroundColor: const Color.fromRGBO(38, 38, 38, 1),
-          title: const Text("Creators", style: TextStyle(color: Colors.white),),
-        ),*/
         backgroundColor: const Color.fromRGBO(23, 23, 23, 1),
         body: SingleChildScrollView(
           child: Center(
@@ -131,7 +126,7 @@ class _CreatorsPageState extends State<CreatorsPage> {
                               creatorStore!.getCreatorsPreviousPage();
                             },
                             icon: const Icon(
-                              Icons.remove,
+                              Icons.arrow_circle_left_rounded,
                               size: 36,
                               color: Colors.white,
                             ))
@@ -145,7 +140,7 @@ class _CreatorsPageState extends State<CreatorsPage> {
                               await creatorStore!.getCreatorsNextPage();
                             },
                             icon: const Icon(
-                              Icons.add,
+                              Icons.arrow_circle_right_rounded,
                               size: 36,
                               color: Colors.white,
                             ))

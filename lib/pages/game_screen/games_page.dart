@@ -5,6 +5,7 @@ import 'package:games_wiki/pages/game_screen/game_page.dart';
 import 'package:games_wiki/pages/game_screen/game_page_store.dart';
 import 'package:games_wiki/services/game_service.dart';
 import 'package:provider/provider.dart';
+import 'package:widget_zoom/widget_zoom.dart';
 
 class GamesPage extends StatefulWidget {
   const GamesPage({super.key});
@@ -47,15 +48,28 @@ class _GamesPageState extends State<GamesPage> {
                 const SizedBox(
                   height: 10,
                 ),
+                const Text(
+                  'Top Games',
+                  style: TextStyle(
+                      fontSize: 24,
+                      color: Colors.white,
+                      fontStyle: FontStyle.italic),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
                 CarouselSlider.builder(
-                    itemCount: 6,
+                    itemCount: 7,
                     itemBuilder: (BuildContext context, int itemIndex,
                         int pageViewIndex) {
                       return Container(
                           width: 320,
                           decoration: BoxDecoration(
                               border: Border.all(color: Colors.grey)),
-                          child: Image.asset('lib/assets/$itemIndex.jpg'));
+                          child: WidgetZoom(
+                              heroAnimationTag: '$itemIndex',
+                              zoomWidget:
+                                  Image.asset('lib/assets/$itemIndex.jpg')));
                     },
                     options: CarouselOptions(
                         height: 180,
@@ -68,6 +82,16 @@ class _GamesPageState extends State<GamesPage> {
                 ),
                 const Divider(
                   color: Colors.grey,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                const Text(
+                  'All Games',
+                  style: TextStyle(
+                      fontSize: 24,
+                      color: Colors.white,
+                      fontStyle: FontStyle.italic),
                 ),
                 const SizedBox(
                   height: 10,
@@ -119,7 +143,8 @@ class _GamesPageState extends State<GamesPage> {
                                         }
                                       },
                                       '${store!.games[index].backgroundImage}',
-                                      errorBuilder: (context, error, stackTrace) {
+                                      errorBuilder:
+                                          (context, error, stackTrace) {
                                         return const Icon(
                                           Icons.image_not_supported_rounded,
                                           size: 140,
@@ -131,18 +156,18 @@ class _GamesPageState extends State<GamesPage> {
                                       child: Container(
                                           height: 50,
                                           decoration: const BoxDecoration(
-                                            color: const Color.fromRGBO(
+                                            color: Color.fromRGBO(
                                                 113, 113, 122, 0.5),
                                           ),
                                           width: 200,
                                           child: Padding(
-                                            padding: EdgeInsets.all(5),
+                                            padding: const EdgeInsets.all(5),
                                             child: Text(
                                               textAlign: TextAlign.center,
                                               "${store!.games[index].name}",
                                               style: const TextStyle(
                                                   color: Colors.white,
-                                                  fontSize: 16),
+                                                  fontSize: 12),
                                             ),
                                           )),
                                     )
