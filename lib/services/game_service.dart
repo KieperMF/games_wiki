@@ -54,6 +54,7 @@ class GameService {
       nextGamePage = jsonDecode(response.body)['next'];
       final decode = jsonDecode(response.body)['results'] as List;
       games = decode.map((e) => GameModel.allGameFromJson(e)).toList();
+      debugPrint('sucess get games');
       return games;
     } catch (e) {
       debugPrint('erro service: $e');

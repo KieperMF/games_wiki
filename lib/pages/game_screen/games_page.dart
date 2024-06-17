@@ -69,7 +69,7 @@ class _GamesPageState extends State<GamesPage> {
                           child: WidgetZoom(
                               heroAnimationTag: '$itemIndex',
                               zoomWidget:
-                                  Image.asset('lib/assets/$itemIndex.jpg')));
+                                  Image.asset('lib/images/$itemIndex.jpg')));
                     },
                     options: CarouselOptions(
                         height: 180,

@@ -84,20 +84,23 @@ class _GamePageState extends State<GamePage> {
                                   size: 90,
                                 ),
                               ))
-                            : Opacity(
-                                opacity: 0.7,
-                                child: Image.network(
-                                  cacheWidth: 480,
-                                  gamePageStore!.screenshots!.last,
-                                  errorBuilder: (context, error, stackTrace) {
-                                    return const Icon(
-                                      Icons.error,
-                                      color: Colors.white,
-                                      size: 150,
-                                    );
-                                  },
+                            : Container(
+                              decoration: BoxDecoration(border: Border.all(color: Colors.white, width: 1.5)),
+                              child: Opacity(
+                                  opacity: 0.7,
+                                  child: Image.network(
+                                    cacheWidth: 480,
+                                    gamePageStore!.screenshots!.last,
+                                    errorBuilder: (context, error, stackTrace) {
+                                      return const Icon(
+                                        Icons.error,
+                                        color: Colors.white,
+                                        size: 150,
+                                      );
+                                    },
+                                  ),
                                 ),
-                              )),
+                            )),
                     Padding(
                       padding: const EdgeInsets.only(top: 130),
                       child: Align(
@@ -105,21 +108,24 @@ class _GamePageState extends State<GamePage> {
                         child: SizedBox(
                             height: 130,
                             width: 300,
-                            child: Image.network(
-                              cacheWidth: 480,
-                              "${gameSelected.backgroundImage}",
-                              loadingBuilder:
-                                  (context, child, loadingProgress) {
-                                if (loadingProgress == null) {
-                                  return child;
-                                } else {
-                                  return const Center(
-                                    child: CircularProgressIndicator(
-                                      color: Colors.red,
-                                    ),
-                                  );
-                                }
-                              },
+                            child: WidgetZoom(
+                              heroAnimationTag: 'game',
+                              zoomWidget: Image.network(
+                                cacheWidth: 480,
+                                "${gameSelected.backgroundImage}",
+                                loadingBuilder:
+                                    (context, child, loadingProgress) {
+                                  if (loadingProgress == null) {
+                                    return child;
+                                  } else {
+                                    return const Center(
+                                      child: CircularProgressIndicator(
+                                        color: Colors.red,
+                                      ),
+                                    );
+                                  }
+                                },
+                              ),
                             )),
                       ),
                     ),
@@ -328,6 +334,7 @@ class _GamePageState extends State<GamePage> {
                                     style: TextStyle(
                                         fontSize: 24, color: Colors.white),
                                   ))),
+                                  const SizedBox(height: 10,),
                           GridView.builder(
                               itemCount: gameSelected.achievementName!.length,
                               physics: const BouncingScrollPhysics(),
@@ -339,7 +346,7 @@ class _GamePageState extends State<GamePage> {
                                 return Column(
                                   children: [
                                     Container(
-                                      color: Colors.grey,
+                                      decoration: BoxDecoration(border: Border.all(color: Colors.grey,)),
                                       width: 140,
                                       height: 140,
                                       child: Image.network(
@@ -349,6 +356,7 @@ class _GamePageState extends State<GamePage> {
                                     ),
                                     SizedBox(
                                         width: 140,
+                                        height: 60,
                                         child: Text(
                                           gameSelected.achievementName![index],
                                           style: const TextStyle(
@@ -380,7 +388,7 @@ class _GamePageState extends State<GamePage> {
                             height: 10,
                           ),
                           SizedBox(
-                            height: 230,
+                            height: 270,
                             width: MediaQuery.of(context).size.width,
                             child: ListView.builder(
                                 shrinkWrap: true,

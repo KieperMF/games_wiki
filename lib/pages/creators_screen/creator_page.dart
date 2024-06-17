@@ -82,57 +82,58 @@ class _CreatorPageState extends State<CreatorPage> {
                   height: 20,
                 ),
                 Padding(
-                    padding: const EdgeInsets.all(5),
-                    child: Column(
-                      children: [
-                        const Text(
-                          "Positions",
-                          style: TextStyle(fontSize: 22, color: Colors.white),
-                        ),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        for (int i = 0;
-                            i < creatorSelected!.positions!.length;
-                            i++) ...[
-                          Text(
-                            creatorSelected!.positions![i],
-                            style: const TextStyle(
-                                fontSize: 20, color: Colors.white),
-                          ),
-                        ]
-                      ],
-                    ),
-                  ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Padding(
-                    padding: const EdgeInsets.all(5),
-                    child: Container(
-                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(16), border: Border.all(color: Colors.grey)),
-                      child: Column(
-                        children: [
-                          const Text(
-                            "Games Maded",
-                            style: TextStyle(fontSize: 22, color: Colors.white),
-                          ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          for (int i = 0;
-                              i < creatorSelected!.gamesMaded!.length;
-                              i++) ...[
-                            Text(
-                              creatorSelected!.gamesMaded![i],
-                              style: const TextStyle(
-                                  fontSize: 20, color: Colors.white),
-                            ),
-                          ],
-                        ],
+                  padding: const EdgeInsets.all(5),
+                  child: Column(
+                    children: [
+                      const Text(
+                        "Positions",
+                        style: TextStyle(fontSize: 22, color: Colors.white),
                       ),
-                    ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      for (int i = 0;
+                          i < creatorSelected!.positions!.length;
+                          i++) ...[
+                        Text(
+                          creatorSelected!.positions![i],
+                          style: const TextStyle(
+                              fontSize: 20, color: Colors.white),
+                        ),
+                      ]
+                    ],
                   ),
+                ),
+                const Padding(padding: EdgeInsets.all(12), child: Divider()),
+                Padding(
+                  padding: const EdgeInsets.all(5),
+                  child: Column(
+                    children: [
+                      const Text(
+                        "Games Maded",
+                        style: TextStyle(fontSize: 22, color: Colors.white),
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      for (int i = 0;
+                          i < creatorSelected!.gamesMaded!.length;
+                          i++) ...[
+                        Text(
+                          creatorSelected!.gamesMaded![i],
+                          style: const TextStyle(
+                              fontSize: 20, color: Colors.white),
+                        ),
+                      ],
+                      const SizedBox(
+                        height: 10,
+                      )
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                )
               ],
             ),
           ),
@@ -141,5 +142,3 @@ class _CreatorPageState extends State<CreatorPage> {
     );
   }
 }
-
-
