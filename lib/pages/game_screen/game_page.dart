@@ -85,8 +85,10 @@ class _GamePageState extends State<GamePage> {
                                 ),
                               ))
                             : Container(
-                              decoration: BoxDecoration(border: Border.all(color: Colors.white, width: 1.5)),
-                              child: Opacity(
+                                decoration: BoxDecoration(
+                                    border: Border.all(
+                                        color: Colors.white, width: 1.5)),
+                                child: Opacity(
                                   opacity: 0.7,
                                   child: Image.network(
                                     cacheWidth: 480,
@@ -100,7 +102,7 @@ class _GamePageState extends State<GamePage> {
                                     },
                                   ),
                                 ),
-                            )),
+                              )),
                     Padding(
                       padding: const EdgeInsets.only(top: 130),
                       child: Align(
@@ -251,12 +253,12 @@ class _GamePageState extends State<GamePage> {
                                                     height: 180,
                                                     width: 320,
                                                     decoration: BoxDecoration(
-                                                        color: Colors.grey,
                                                         border: Border.all(
                                                             color:
                                                                 Colors.white)),
                                                     child: WidgetZoom(
-                                                      heroAnimationTag: '$index',
+                                                      heroAnimationTag:
+                                                          '$index',
                                                       zoomWidget: Image.network(
                                                         loadingBuilder: (context,
                                                             child,
@@ -268,14 +270,16 @@ class _GamePageState extends State<GamePage> {
                                                             return const Center(
                                                               child:
                                                                   CircularProgressIndicator(
-                                                                color: Colors.red,
+                                                                color:
+                                                                    Colors.red,
                                                               ),
                                                             );
                                                           }
                                                         },
                                                         cacheWidth: 600,
                                                         gamePageStore!
-                                                            .screenshots![index],
+                                                                .screenshots![
+                                                            index],
                                                         height: 170,
                                                       ),
                                                     ),
@@ -334,7 +338,9 @@ class _GamePageState extends State<GamePage> {
                                     style: TextStyle(
                                         fontSize: 24, color: Colors.white),
                                   ))),
-                                  const SizedBox(height: 10,),
+                          const SizedBox(
+                            height: 10,
+                          ),
                           GridView.builder(
                               itemCount: gameSelected.achievementName!.length,
                               physics: const BouncingScrollPhysics(),
@@ -346,7 +352,10 @@ class _GamePageState extends State<GamePage> {
                                 return Column(
                                   children: [
                                     Container(
-                                      decoration: BoxDecoration(border: Border.all(color: Colors.grey,)),
+                                      decoration: BoxDecoration(
+                                          border: Border.all(
+                                        color: Colors.grey,
+                                      )),
                                       width: 140,
                                       height: 140,
                                       child: Image.network(
