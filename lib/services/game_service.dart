@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter/material.dart';
 import 'package:games_wiki/core/interfaces/http_interface.dart';
 import 'package:games_wiki/models/game_model.dart';
@@ -17,7 +18,7 @@ class GameService {
     try {
       final response = await http.getData(
           path:
-              'https://api.rawg.io/api/games/${gameSelected.id}/achievements?key=f40f66dd22c542d2b422b922b714f749&page=1');
+              'https://api.rawg.io/api/games/${gameSelected.id}/achievements?key=${dotenv.env['key']}&page=1');
       final decode = jsonDecode(response.body)['results'];
 
       gameSelected.achievementDescription = decode
@@ -50,7 +51,7 @@ class GameService {
     try {
       final response = await http.getData(
           path:
-              'https://api.rawg.io/api/games?key=f40f66dd22c542d2b422b922b714f749');
+              'https://api.rawg.io/api/games?key=${dotenv.env['key']}');
       nextGamePage = jsonDecode(response.body)['next'];
       final decode = jsonDecode(response.body)['results'] as List;
       games = decode.map((e) => GameModel.allGameFromJson(e)).toList();
@@ -95,7 +96,7 @@ class GameService {
       List<String> screenShotsGame = [];
       final response = await http.getData(
           path:
-              'https://api.rawg.io/api/games/$gameId/screenshots?key=f40f66dd22c542d2b422b922b714f749');
+              'https://api.rawg.io/api/games/$gameId/screenshots?key=${dotenv.env['key']}');
       final decode = jsonDecode(response.body);
       List<dynamic> results = decode['results'] as List;
       for (var result in results) {
@@ -112,7 +113,7 @@ class GameService {
     try {
       final response = await http.getData(
           path:
-              'https://api.rawg.io/api/games/$id/game-series?key=f40f66dd22c542d2b422b922b714f749');
+              'https://api.rawg.io/api/games/$id/game-series?key=${dotenv.env['key']}');
       final decode = jsonDecode(response.body)['results'] as List;
       games = decode.map((e) => GameModel.allGameFromJson(e)).toList();
       return games;
